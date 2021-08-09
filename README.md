@@ -4,7 +4,7 @@
    1. Repository: Github
    2. Front end: React
    3. Back end: Javascrpit
-     * Database:
+      * Database:
    4. Project management: Trello
    5. Communication: Wechat
 ## 2. Work allocation
