@@ -21,15 +21,14 @@
    * Meeting with client:
      1. 06/08/2021 5:30 p.m.
    * Development timeline
-      Week3: Learn all the tools, Translating the requirment
-      Week4: Develop a demo
-      Week5：Continue developing the demo(**log in**) 
-         * _Week5 Friday: Finish the demo -> transmate into the requirement_
-      Week6: Provide a prototype of the front end
-      Week7:
-      Week8:
-      Week9: Testing
-      Week10: Write Report
-      Week11: Prepare Presentation
+      * Week3: Learn all the tools, Translating the requirment: Javascript, html, css
+      * Week4: Domain Model, contining on leanning Express, MongoDB and React
+      * Week5：Develop Welcome page & Contacts List
+      * Week6: Given an basic model for Develop Welcome page & Contacts List
+      * Week7:
+      * Week8: Web Server
+      * Week9: Testing
+      * Week10: Write Report
+      * Week11: Prepare Presentation
       
      
