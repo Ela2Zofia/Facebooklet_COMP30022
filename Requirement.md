@@ -1,0 +1,42 @@
+# IT Project
+
+**Mandatory**
+  - Login  
+    - Generate unique user ID
+    - Cannot access main page without authentication
+  - Customer Relation Management Page
+    - Search/Add/Delete/Modify contacts (possibly add tags and supports multi-user add/delete function)
+    - Contacts should have detail page and summary page
+    - Contacts information:
+      - ID
+      - Name
+      - Occupation (optional)
+      - Tag (optional)
+      - Phone number (**Format verification**)
+      - Email (**Format verification**)
+      - **Custom content**
+    - Sorted contacts list
+    - Search contacts via tags(optional)
+  - Meeting Management Page
+    - Search/Add/Delete/Modify meetings
+    - Meeting information
+      - Meeting name
+      - Meeting summary
+      - Meeting attendees (signed user)
+      - Meeting link
+      - Start time & end time
+      - **Custom content**
+    - Display future/ongoing/finished meetings
+    - Notification function
+    - Individual info page for meetings
+***
+- **Optional**
+  - Authentication method
+    - anti-bot
+  - Contacts
+    - Embeded e-mail function
+    - Check their last online time
+    - Check their last contact time
+    - Show number of current concurrent online contacts
+  - Meetings
+    - List of meetings, best to be implemented in a timetable or calendar form
