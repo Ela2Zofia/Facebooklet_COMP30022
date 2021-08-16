@@ -2,16 +2,16 @@
 > Platform: Web
 ## 1. Tools
    1. Repository: Github
-   2. Front end: React,JASN
-   3. Back end: Javascrpit,Node
-      * Database:n MogoDB
+   2. Frontend: React
+   3. Backend: Node.JS
+      * Database: MongoDB
    4. Project management: Trello
    5. Communication: Wechat
-   6. Serverser: Ali Cloud
+   6. Server: Ali Cloud
 ## 2. Work allocation
    1. Project manager:
-   2. Front end: Derrick, Michael
-   3. Back end: Simon, sc, Whale Fall
+   2. Frontend: Derrick, Michael
+   3. Backend: Simon, sc, Whale Fall
    4. Testing: 
 ## 3. Timeline
    * Assessment date:
