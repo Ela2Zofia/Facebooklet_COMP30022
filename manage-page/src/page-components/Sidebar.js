@@ -11,7 +11,7 @@ const Sidebar = ({onClick}) => {
         { SidebarData.map( ( val, key ) => {
           return (
             <Link key={key} to={val.link} className="ReactLink">
-              <button className="SidebarItem" id={val.title==="User" ? "active" : ""} data-url={val.link} onClick={()=>{onClick(val.link)}}>
+              <button className="SidebarItem" id="" data-url={val.link} onClick={()=>{onClick(val.link)}}>
                 <div className="SidebarIcon">{ val.icon }</div>
                 <div className="SidebarTitle">{ val.title }</div>
               </button>

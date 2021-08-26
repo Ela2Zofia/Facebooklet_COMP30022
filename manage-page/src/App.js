@@ -1,12 +1,11 @@
 import './App.css';
 import React from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import Home from './components/Home';
 import Contacts from './components/Contacts';
 import Meetings from './components/Meetings';
-import Sidebar from './components/Sidebar';
+import Sidebar from './page-components/Sidebar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Calendar from './components/Calendar';
 
 
 function App() {
@@ -26,27 +25,33 @@ function App() {
     }
   };
 
+
   return (
     <div className="App">
 
         <Router className="Router">
           <Sidebar onClick={checkActive}/>
           
-          <Switch>
+          <div>
+            <Switch>
 
-            <Route exact path="/home">
-              <Home />
-            </Route>
+              <Route exact path={["/home","/"]} className="Route">
+                <Home />
+              </Route>
 
-            <Route exact path="/contacts">
-              <Contacts />
-            </Route>
+              <Route exact path="/contacts">
+                <Contacts />
+              </Route>
 
-            <Route exact path="/meetings">
-              <Meetings />
-            </Route>
-          </Switch>
+              <Route exact path="/meetings">
+                <Meetings />
+              </Route>
 
+              <Route exact path="/calendar">
+                <Calendar />
+              </Route>
+            </Switch>
+          </div>
           {/* <Footer /> */}
         </Router>
 
