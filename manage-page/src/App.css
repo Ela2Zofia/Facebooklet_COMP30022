@@ -63,7 +63,7 @@ footer {
 }
 
 #active{
-    background-color: white;
+    background-color: whitesmoke;
     animation: none;
 }
 
@@ -106,18 +106,20 @@ footer {
     justify-content: flex-start;
     align-items: center;
     text-align: center;
+    background-color: whitesmoke;
 }
 
 .Contact{
     margin-bottom: 20px;
-    line-height: 2;
-    border-radius: 20px;
+    line-height: 1.7;
+    border-radius: 30px;
     padding-left: 2%;
-    border: 1px solid rgb(0, 0, 0);
-    width: 70%;
+    border: 1px solid rgb(173,173,173);
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    background-color: white;
     cursor: pointer;
 }
 
@@ -127,7 +129,7 @@ footer {
 }
 
 .Contact:hover{
-    box-shadow: 2px 2px 10px rgb(88, 85, 81);
+    box-shadow: 2px 2px 10px rgb(197, 197, 197);
 }
 
 .Topbar{
