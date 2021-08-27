@@ -1,5 +1,7 @@
 const express = require("express");
-const User = require("./db/models/User");
+const { checkDb, addInDb, checkDupl } = require("./controller/user");
+const { ErrorModel, SuccessModel } = require("./model/resModel");
+
 var app = new express(); // 实例化express
 // 用来获取post数据
 urlencodedParser = express.urlencoded({ extended: false });
@@ -40,21 +42,25 @@ app.use(
 
 app.use(function (req, res, next) {
   // 判断路由，除了login和dologin之外不需要跳转
-  
-    if (req.url == '/login' || req.url == '/dologin' || req.url == '/doregister' || req.url == '/doForget') {
-        next();
+
+  if (
+    req.url == "/login" ||
+    req.url == "/dologin" ||
+    req.url == "/doregister" ||
+    req.url == "/doForget"
+  ) {
+    next();
+  } else {
+    // 除了login和dologin界面 都要判断是否存在session
+    if (req.session.userinfo && req.session.userinfo.username != "") {
+      //ejs中 设置全局变量，所有页面可以使用
+      app.locals["userinfo"] = req.session.userinfo;
+      next();
     } else {
-        // 除了login和dologin界面 都要判断是否存在session
-        if (req.session.userinfo && req.session.userinfo.username != "") {
-            //ejs中 设置全局变量，所有页面可以使用
-            app.locals['userinfo'] = req.session.userinfo; 
-            next();
-        } else {
-            // 如果没登陆就跳转登陆页面
-            res.redirect('/login');
-        }
+      // 如果没登陆就跳转登陆页面
+      res.redirect("/login");
     }
-    
+  }
 });
 
 // 默认页面 直接额跳转登陆页面
@@ -72,25 +78,40 @@ app.get("/email", function (req, res) {
   res.render("email");
 });
 
-app.post("/doForget", urlencodedParser, function (req, res) {
+app.post("/doForget", urlencodedParser, async function (req, res) {
   var email = req.body.Email;
+  let text = "";
+  const data = await checkDb(email);
   //查数据库
-//   console.log(req.body.password);
-  !(async () => {
-    const data = await User.find({
-      username: req.body.username,
-      password: req.body.password,
-    });
-    // console.log(data);
-  })();
-
+  //   console.log(req.body.password);
+  console.log(data);
+  // checkDb(email);
+  if (data.length !== 0) {
+    for (let index = 0; index < data.length; index++) {
+      text += data[index].username;
+      text += ", ";
+      text += data[index].password;
+      text += "; ";
+    }
+    // console.log(text);
+    var mailOptions = {
+      from: "itprojectexample.com",
+      to: email,
+      subject: "Your UserName and Password: ",
+      text: text, //从数据库里查出来的账号密码
+    };
+  } else {
+    //返回login界面
+    // console.log("finish");
+    return res.redirect("/login");
+  }
   //如果查不到返回false
-  var mailOptions = {
-    from: "itprojectexample.com",
-    to: email,
-    subject: "Your UserName and Password: ",
-    text: data.password, //从数据库里查出来的账号密码
-  };
+  // var mailOptions = {
+  //   from: "itprojectexample.com",
+  //   to: email,
+  //   subject: "Your UserName and Password: ",
+  //   text: "data.password", //从数据库里查出来的账号密码
+  // };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
@@ -101,15 +122,20 @@ app.post("/doForget", urlencodedParser, function (req, res) {
   res.send("<script>alert('Email Sent!');location.href='login'</script>");
 });
 
-
-app.post("/doregister", urlencodedParser, function (req, res) {
+app.post("/doregister", urlencodedParser, async function (req, res) {
   var username = req.body.Username;
   var email = req.body.Email;
   var password = req.body.Password;
   var confirm_passowrd = req.body.Confirm_Password;
 
   //再查一下有没有重名和重复邮箱的
+  const result = await checkDupl(username, email);
+  // console.log(data);
+  if (result) {
+    return res.redirect("/login");
+  }
 
+  // console.log(data);
   if (password.length < 6) {
     res.send(
       "<script>alert('Password is too short(need to be at least 6 characters)!!');location.href='login'</script>"
@@ -140,15 +166,16 @@ app.post("/doregister", urlencodedParser, function (req, res) {
       "<script>alert('You have finished all the step!');location.href='login'</script>"
     );
     //把信息存入数据库
-    !(async () => {
-      //创建用户
-      const userdata = await User.create({
-        username: username,
-        password: md5(password),
-        email: email,
-      });
-      console.log(userdata);
-    })();
+    // !(async () => {
+    //   //创建用户
+    //   const userdata = await User.create({
+    //     username: username,
+    //     password: md5(password),
+    //     email: email,
+    //   });
+    //   console.log(userdata);
+    // })();
+    addInDb(username, md5(password), email);
   }
 });
 
@@ -167,7 +194,7 @@ app.post("/dologin", urlencodedParser, function (req, res) {
     const mydb = db.db("project_demo");
     var result = mydb.collection("users").find({
       username: username,
-      password: password
+      password: password,
     });
     result.toArray(function (error, data) {
       //console.log(data.length);

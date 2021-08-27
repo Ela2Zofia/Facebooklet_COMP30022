@@ -11,7 +11,11 @@ const UserSchema = mongoose.Schema({
         unique: true //唯一，不重复
     },
     password: String,
-    email: String
+    email: {
+        type: String,
+        required: true, //这个username是必须得有的
+        unique: true //唯一，不重复
+    }
 })
 
 //model对应collection
