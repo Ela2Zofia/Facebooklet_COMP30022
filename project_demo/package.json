@@ -5,6 +5,8 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "md5-node": "^1.0.1",
-    "mongodb": "^4.1.0"
+    "mongodb": "^4.1.0",
+    "mongoose": "^6.0.2",
+    "nodemailer": "^6.6.3"
   }
 }

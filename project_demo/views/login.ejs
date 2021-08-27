@@ -17,21 +17,21 @@
         </div>
         <div class="formRight">
             <!-- Forgot password form -->
-            <form id="forgot" class="otherForm">
+            <form id="forgot" action = "/doForget" method = "post" class="otherForm">
                 <header>
-                    <h1>忘记密码</h1>
-                    <p>输入邮箱找回密码</p>
+                    <h1>Forget Password?</h1>
+                    <p>Enter Your Email Address</p>
                 </header>
                 <section>
                     <label>
-                        <p>邮箱</p>
-                        <input type="email" placeholder=" ">
+                        <p>Email</p>
+                        <input type="email" name = "Email" placeholder=" ">
                         <div class="border"></div>
                     </label>
-                    <button type="submit">发送邮件</button>
+                    <button type="submit">Confirm</button>
                 </section>
                 <footer>
-                    <button type="button" class="forgotBtn">返回</button>
+                    <button type="button" class="forgotBtn">back</button>
                 </footer>
             </form>
 
@@ -55,42 +55,41 @@
                     <button type="submit">Submit</button>
                 </section>
                 <footer>
-                    <button type="button" class="forgotBtn">忘记密码？</button>
-                    <button type="button" class="registerBtn">新用户？</button>
+                    <button type="button" class="forgotBtn">Forget Password？</button>
+                    <button type="button" class="registerBtn">New User？</button>
                 </footer>
             </form>
 
             <!-- Register form -->
-            <form id="register" class="otherForm">
+            <form id="register" action='/doregister' method = "post" class="otherForm">
                 <header>
-                    <h1>用户注册</h1>
-                    <p>注册后享受更多服务</p>
+                    <h1>Register</h1>
                 </header>
                 <section>
                     <label>
-                        <p>用户名</p>
-                        <input type="text" placeholder=" ">
+                        <p>Username</p>
+                        <input type="text" name = "Username" placeholder=" ">
                         <div class="border"></div>
                     </label>
                     <label>
-                        <p>邮箱</p>
-                        <input type="email" placeholder=" ">
+                        <p>E-mail</p>
+                        <input type="email" name = "Email" placeholder=" ">
                         <div class="border"></div>
                     </label>
                     <label>
-                        <p>密码</p>
-                        <input type="password" placeholder=" ">
+                        <p>Password</p>
+                        <input type="password" name = "Password" placeholder=" ">
                         <div class="border"></div>
                     </label>
                     <label>
-                        <p>重复密码</p>
-                        <input type="password" placeholder=" ">
+                        <p>Comfirm Password</p>
+                        <input type="password" name = "Confirm_Password" placeholder=" ">
                         <div class="border"></div>
                     </label>
-                    <button type="submit">注 册</button>
+                    <button type="submit">Register</button>
                 </section>
                 <footer>
-                    <button type="button" class="registerBtn">返回</button>
+                    <button type="button" class="registerBtn">back</button>
                 </footer>
             </form>
         </div>
