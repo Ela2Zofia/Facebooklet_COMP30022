@@ -1,5 +1,5 @@
-import './App.css';
-import React from 'react';
+import './css/App.css';
+import React, { useState } from 'react';
 import Home from './components/Home';
 import Contacts from './components/Contacts';
 import Meetings from './components/Meetings';
@@ -10,6 +10,11 @@ import Calendar from './components/Calendar';
 
 function App() {
 
+  const [user, setUser] = useState("");
+
+  // const [ contacts, setContacts] = useState([])
+  
+  
   function checkActive(link){
     const react_links = document.getElementsByClassName("SidebarItem");
     
@@ -35,11 +40,11 @@ function App() {
           <div>
             <Switch>
 
-              <Route exact path={["/home","/"]} className="Route">
+              <Route exact path={["/home","/"]}>
                 <Home />
               </Route>
 
-              <Route exact path="/contacts">
+              <Route path="/contacts">
                 <Contacts />
               </Route>
 

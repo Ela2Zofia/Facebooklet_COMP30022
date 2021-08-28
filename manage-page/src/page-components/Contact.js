@@ -1,12 +1,20 @@
-function Contact(props) {
+import { Link } from "react-router-dom"
+
+function Contact({id, contact}) {
   
 
 
   return (
+    // <Link to={"/" + contact.firstName + "-" + contact.lastName}>
     <div className="Contact">
-      <div className="name">{props.firstName + " " + props.lastName}</div>
-      <div>{props.occupation}</div>
-      <div>{props.email}</div>
+      
+        <div className="ContactHeader">
+          <div className="name">{contact.firstName + " " + contact.lastName}</div>
+          <div className="occupation">{contact.occupation}</div>
+        </div>
+
+        <div className="email">{contact.email}</div>
+      
     </div>
   )
 }

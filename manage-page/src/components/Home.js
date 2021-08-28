@@ -1,7 +1,14 @@
+import {RiUserLine} from "react-icons/ri"
+
 function Home() {
   return (
     <div className="Container">
-      <h1>This is home</h1>
+      <div className="User">
+        <div id = "Avatar">
+          <RiUserLine size={80}/>
+        </div>
+        
+      </div>
     </div>
   )
 }

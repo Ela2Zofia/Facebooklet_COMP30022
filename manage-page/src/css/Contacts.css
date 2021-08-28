@@ -1,0 +1,42 @@
+.Contact{
+    height: 80px;
+    margin-bottom: 20px;
+    line-height: 1.7;
+    border-radius: 30px;
+    padding-left: 5%;
+    padding-right: 10%;
+    border: 1px solid rgb(173,173,173);
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    /* flex-wrap: wrap; */
+    background-color: white;
+    cursor: pointer;
+}
+
+.Contact .name{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.ContactHeader{
+    /* border: 1px solid black; */
+    flex: 30%;
+    text-align: left;
+}
+
+.Contact .email{
+    /* border: 1px solid black; */
+    text-align: left;
+    flex: 50%;
+}
+
+.Contact:hover{
+    box-shadow: 2px 2px 10px rgb(197, 197, 197);
+}
+
+.Contact.selected{
+    background-color: rgba(170, 235, 170, 0.596);
+}
