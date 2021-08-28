@@ -9,10 +9,9 @@
    5. Communication: Wechat
    6. Server: Ali Cloud
 ## 2. Work allocation
-   1. Project manager:
-   2. Frontend: Derrick, Michael
-   3. Backend: Simon, sc, Whale Fall
-   4. Testing: 
+   1. Frontend: Derrick, Michael
+   2. Backend: Simon, sc, Whale Fall
+   3. Testing: 
 ## 3. Timeline
    * Assessment date:
      * Week 6
