@@ -44,24 +44,32 @@
     background-color: whitesmoke;
 }
 
+.ContactFormWrapper{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0%;
+    left: 0%;
+}
+
 .ContactForm{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: rgb(238, 238, 238);
     position: fixed;
     width: 50vw;
-    height: 50vh;
-    top: 25%;
+    height: 80vh;
+    top: 10%;
     left: 25%;
     border-radius: 10px;
     box-shadow: 0 5px 10px rgb(197, 197, 197);
 }
 
-#CloseButton{
+.TopbarCloseButton{
     display:flex;
-    /* border: 1px solid black; */
+    border: 1px solid black;
     padding-right: 1%;
     width: 100%;
     height: 8%;
@@ -72,7 +80,7 @@
     text-align: right;
 }
 
-#CloseButton button{
+.TopbarCloseButton button{
     font-size: large;
     font-weight: bold;
     border: none;
