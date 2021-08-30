@@ -1,32 +1,41 @@
 {
   "contacts": [
     {
-      "id":1,
-      "firstName":"Derrick",
+      "id": 1,
+      "firstName": "Derrick",
       "lastName": "Li",
-      "occupation":"Google CEO",
-      "email":"hello@thisisapage.com",
+      "occupation": "Google CEO",
+      "email": "hello@thisisapage.com",
       "phone": 1145141919819,
-      "tag": ["people","crazy_smart"],
-      "description": "A good man"
-    },{
-      "id":2,
-      "firstName":"Nikola",
-      "lastName":"Kovač",
-      "occupation":"G2 Player",
-      "email":"hello@juandeag.com",
+      "tag": [
+        "people",
+        "crazy_smart"
+      ],
+      "description": "Someone"
+    },
+    {
+      "id": 2,
+      "firstName": "Nikola",
+      "lastName": "Kovač",
+      "occupation": "G2 Player",
+      "email": "hello@juandeag.com",
       "phone": 1145141919819,
-      "tag": ["people"],
-      "description": "A good man"
-    },{
-      "id":3,
-      "firstName":"Kenny",
-      "lastName":"Schrub",
-      "occupation":"G2 Streamer",
-      "email":"hello@fastasfuckboi.com",
+      "tag": [
+        "people"
+      ],
+      "description": "Best AKer"
+    },
+    {
+      "id": 3,
+      "firstName": "Kenny",
+      "lastName": "Schrub",
+      "occupation": "G2 Streamer",
+      "email": "hello@fastasfuckboi.com",
       "phone": 1145141919819,
-      "tag": ["people"],
-      "description": "A good man"
+      "tag": [
+        "people"
+      ],
+      "description": "Fastest AWPer"
     }
   ]
 }

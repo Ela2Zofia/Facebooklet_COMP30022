@@ -24,7 +24,6 @@
     /* border: 1px solid black; */
     flex: 30%;
     text-align: left;
-    cursor: pointer;
 }
 
 .Contact .email{
@@ -95,7 +94,7 @@
     text-align: right;
 }
 
-.CloseButton button{
+.CloseButton .button{
     font-size: large;
     font-weight: bold;
     border: none;

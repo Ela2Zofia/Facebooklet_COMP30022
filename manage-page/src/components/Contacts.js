@@ -6,7 +6,7 @@ import "../css/Contacts.css"
 
 function Contacts() {
   // const HOST = "http://localhost:8000/contacts";
-  const HOST = "http://localhost:5000/contacts"
+  const HOST = "http://localhost:5000/contacts";
   const [ contacts, setContacts ] = useState([])
   
   const requestOptions = {
@@ -14,7 +14,7 @@ function Contacts() {
     headers: {
       "Content-type": "request"
     },
-    // body: JSON.stringify({ title: 'React POST Request Example' })
+    // body: "HELLO THIS IS POST REQUEST"
   }
 
   async function fetchContacts(){
@@ -23,9 +23,6 @@ function Contacts() {
     // await console.log(data);
     return data;
   }
-
-
-  
 
   useEffect(()=>{
     async function getContacts(){

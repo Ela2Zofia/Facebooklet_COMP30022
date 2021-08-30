@@ -19,6 +19,7 @@ function App() {
     const react_links = document.getElementsByClassName("SidebarItem");
     
     for(let i in react_links){
+      
       if(typeof(react_links[i])==="object"){
         if (react_links[i].dataset.url === link){
           react_links[i].setAttribute("id", "active");
