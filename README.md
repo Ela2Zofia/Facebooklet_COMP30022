@@ -30,5 +30,6 @@
       * Week10: Write Report
       * Week11: Prepare Presentation
       
-## 4. Google Drive
-   * [Documents](https://drive.google.com/drive/folders/1zY63Rv0ovc5iNldNLmVsxWoQtF1YE7T8?usp=sharing)
+## 4. Documents
+   * [Google Drive](https://drive.google.com/drive/folders/1zY63Rv0ovc5iNldNLmVsxWoQtF1YE7T8?usp=sharing)
+   * [Trello](https://trello.com/invite/b/Fv2l6gPe/987cde8bed72f4448950023997a2da99/it-project)
