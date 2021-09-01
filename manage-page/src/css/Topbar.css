@@ -112,7 +112,7 @@
 }
 
 
-.ContactForm input{
+.ContactForm>input{
     width: 40%;
     height: 5%;
     font-size: large;

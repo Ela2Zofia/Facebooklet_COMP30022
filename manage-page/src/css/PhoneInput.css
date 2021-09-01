@@ -22,15 +22,11 @@
 .PhoneInput {
 	/* This is done to stretch the contents of this component. */
 	display: flex;
-	/* align-items: center; */
+	align-items: center;
 	width: 40%;
 	height: 5%;
 	margin-bottom: 10px;
 	/* border: 1px solid black; */
-}
-
-.PhoneInput input{
-	height: 100%;
 }
 
 .PhoneInputInput {
@@ -39,8 +35,11 @@
 	/* The phone number input should shrink
 	   to make room for the extension input */
 	min-width: 0;
+	height: 100%;
+	font-size: large;
+	border: none;
+	border-radius: 5px;
 	font-family: inherit;
-	
 }
 
 .PhoneInputCountryIcon {
@@ -92,6 +91,7 @@
 	display: flex;
 	align-items: center;
 	margin-right: var(--PhoneInputCountrySelect-marginRight);
+	
 }
 
 .PhoneInputCountrySelect {
@@ -104,6 +104,8 @@
 	border: 0;
 	opacity: 0;
 	cursor: pointer;
+	
+	
 }
 
 .PhoneInputCountrySelect[disabled] {
