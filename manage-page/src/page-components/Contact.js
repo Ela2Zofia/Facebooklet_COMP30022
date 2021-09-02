@@ -1,10 +1,13 @@
 import {RiMoreLine} from "react-icons/ri";
 import { useState } from "react";
 import ContactInfo from "./ContactInfo";
+import { useSelector, useDispatch } from "react-redux";
 
 function Contact({id, contact}) {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
+  const isEdit = useSelector(state => state.isEdit)
 
 
   return (
@@ -17,8 +20,11 @@ function Contact({id, contact}) {
         </div>
 
         <div className="email">{contact.email}</div>
-        <RiMoreLine onClick={()=>setIsOpen(true)} size={30} className="more"/>
-
+        {
+          isEdit 
+          ? <input type="checkbox" style={{transform: "scale(2.5)"}}/> 
+          : <RiMoreLine onClick={()=>setIsOpen(true)} size={30} className="more"/>
+        }
         <ContactInfo open={isOpen} contact={contact} onClose={()=>setIsOpen(false)}/>
       </div>
     

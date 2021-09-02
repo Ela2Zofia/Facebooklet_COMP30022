@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import Contact from '../page-components/Contact'
 import Topbar from '../page-components/Topbar'
 import setContacts from '../actions/setContacts'
+import stopEdit from "../actions/stopEdit"
+import clearSeleted from "../actions/clearSeleted"
 import "../css/Contacts.css"
 
 function Contacts() {
@@ -13,6 +15,9 @@ function Contacts() {
   const contacts = useSelector(state => state.contacts)
   const dispatch = useDispatch()
   
+
+  // net code to fetch contacts from the server
+  //
   const requestOptions = {
     method: "GET",
     headers: {
@@ -23,6 +28,11 @@ function Contacts() {
 
   async function fetchContacts(){
     const res = await fetch(HOST);
+
+    if(!res.ok){
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
     const data = await res.json();
     // console.log(data);
     return data;
@@ -34,24 +44,34 @@ function Contacts() {
       dispatch(setContacts(serverData))
     }
     getContacts();
+    
   }, [])
+
+
+  // reset states on page load
+  //
+  dispatch(stopEdit());
+  dispatch(clearSeleted());
+
 
 
   return (
     <div className="Container">
       <Topbar />
 
-      {contacts.length === 0 ?
-        <h3>No Contacts</h3>
-        : contacts.map(
-        (contact) =>{
-          return(
-          <Contact
-            key = {contact.id}
-            contact = {contact}  
-          />)
-        }
-      )}
+      <div className="InnerContainer">
+        {contacts.length === 0 ?
+          <h3>No Contacts</h3>
+          : contacts.map(
+          (contact) =>{
+            return(
+            <Contact
+              key = {contact.id}
+              contact = {contact}  
+            />)
+          }
+        )}
+      </div>
     </div>
   )
 }

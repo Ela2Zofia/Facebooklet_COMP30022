@@ -109,6 +109,18 @@ footer {
     background-color: whitesmoke;
 }
 
+.InnerContainer{
+    /* border: 1px solid black; */
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    overflow: auto;
+}
+
 
 .User{
     width: 100%;

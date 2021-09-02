@@ -3,14 +3,13 @@ import { useState } from "react";
 import reactDom from "react-dom";
 import {RiCloseLine} from "react-icons/ri"
 import PhoneInput from "react-phone-number-input";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import addContact from "../actions/addContact";
 
 
 function ContactForm({open, onClose}) {
   
   // new data from the form
-  const [newContact, setNewContact] = useState({})
   const [fname, setFname] = useState("")
   const [lname, setLname] = useState("")
   const [occup, setOccup] = useState("")
@@ -66,6 +65,11 @@ function ContactForm({open, onClose}) {
             description: desc
           })
         });
+        
+        if(!res.ok){
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
         const data = await res.json()
         return data;
       };

@@ -2,7 +2,6 @@
     width:calc(100% - 2*20px);
     height: 55px;
     padding: 5px 20px;
-    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     /* border-bottom: 1px solid black; */
