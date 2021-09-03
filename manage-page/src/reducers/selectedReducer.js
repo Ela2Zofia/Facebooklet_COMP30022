@@ -4,8 +4,8 @@ function selectedReducer(state = [], action) {
     case "ADD_SELECTED":
       return [...state, action.payload]
     case "REMOVE_SELECTED":
-      return state.filter(item => item != action.payload)
-    case "CLEAR_SELETED":
+      return state.filter(item => item !== action.payload)
+    case "CLEAR_SELECTED":
       return []
     default:
       return state

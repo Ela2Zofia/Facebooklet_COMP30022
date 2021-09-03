@@ -1,4 +1,3 @@
-
 function deleteMeeting(id) {
   return (
     {

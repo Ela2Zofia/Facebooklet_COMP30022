@@ -8,8 +8,8 @@ const allReducers = combineReducers(
   {
     contacts: contactReducer,
     isEdit: editReducer,
-    seleted: selectedReducer
-    // user: userReducer 
+    selected: selectedReducer,
+    user: userReducer 
   }
 )
 

@@ -1,4 +1,4 @@
-function addSeleted(id) {
+function addSelected(id) {
   return (
     {
       type: "ADD_SELECTED",
@@ -7,4 +7,4 @@ function addSeleted(id) {
   )
 }
 
-export default addSeleted
+export default addSelected

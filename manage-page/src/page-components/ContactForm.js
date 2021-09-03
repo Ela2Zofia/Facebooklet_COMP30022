@@ -18,7 +18,7 @@ function ContactForm({open, onClose}) {
   const [desc, setDesc] = useState("")
 
   const dispatch = useDispatch()
-  
+  // const user = useSelector(state => state.user);
 
   // net code to post to server
 
@@ -38,6 +38,7 @@ function ContactForm({open, onClose}) {
   // submit new contact to state and server
   function submitContact(){
 
+    // eslint-disable-next-line
     const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     if (!fname) {
@@ -53,7 +54,9 @@ function ContactForm({open, onClose}) {
         const res = await fetch(HOST, {
           method: "POST",
           headers: {
-            "Content-type": "application/json"
+            "Content-type": "application/json",
+            // TODO: user header
+            // "User": user
           },
           body: JSON.stringify({
             firstName: fname,

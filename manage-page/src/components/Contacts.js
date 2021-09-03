@@ -4,16 +4,21 @@ import { useSelector, useDispatch } from 'react-redux'
 import Contact from '../page-components/Contact'
 import Topbar from '../page-components/Topbar'
 import setContacts from '../actions/setContacts'
-import stopEdit from "../actions/stopEdit"
-import clearSeleted from "../actions/clearSeleted"
+import endEdit from "../actions/endEdit"
+import clearSelected from "../actions/clearSelected"
 import "../css/Contacts.css"
 
 function Contacts() {
 
+  // express address
   // const HOST = "http://localhost:8000/contacts";
+
+  // json-server address
   const HOST = "http://localhost:5000/contacts";
-  const contacts = useSelector(state => state.contacts)
-  const dispatch = useDispatch()
+  const contacts = useSelector(state => state.contacts);
+  const selected = useSelector(state => state.selected);
+  const dispatch = useDispatch();
+  // const user = useSelector(state => state.user);
   
 
   // net code to fetch contacts from the server
@@ -21,13 +26,14 @@ function Contacts() {
   const requestOptions = {
     method: "GET",
     headers: {
-      "Content-type": "request"
-    },
-    // body: "HELLO THIS IS POST REQUEST"
-  }
+      "Content-type": "application/json",
 
+      // TODO: user header
+      // "User": user
+    }
+  }
   async function fetchContacts(){
-    const res = await fetch(HOST);
+    const res = await fetch(HOST, requestOptions);
 
     if(!res.ok){
       throw new Error(`HTTP error! status: ${res.status}`);
@@ -37,21 +43,23 @@ function Contacts() {
     // console.log(data);
     return data;
   }
-
+  
   useEffect(()=>{
+
     async function getContacts(){
       const serverData = await fetchContacts();
       dispatch(setContacts(serverData))
     }
     getContacts();
     
+    // reset states on page load
+    //
+    dispatch(endEdit());
+    dispatch(clearSelected());
   }, [])
 
 
-  // reset states on page load
-  //
-  dispatch(stopEdit());
-  dispatch(clearSeleted());
+  
 
 
 
@@ -67,7 +75,8 @@ function Contacts() {
             return(
             <Contact
               key = {contact.id}
-              contact = {contact}  
+              contact = {contact}
+              isSelected = {selected.includes(contact.id)}
             />)
           }
         )}
