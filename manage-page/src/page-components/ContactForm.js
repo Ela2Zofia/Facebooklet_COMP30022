@@ -3,27 +3,25 @@ import { useState } from "react";
 import reactDom from "react-dom";
 import {RiCloseLine} from "react-icons/ri"
 import PhoneInput from "react-phone-number-input";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import addContact from "../actions/addContact";
+import Network from "../util/Network";
 
 
 function ContactForm({open, onClose}) {
   
   // new data from the form
-  const [fname, setFname] = useState("")
-  const [lname, setLname] = useState("")
-  const [occup, setOccup] = useState("")
-  const [email, setEmail] = useState("")
-  const [pnumber, setPnumber] = useState(null)
-  const [desc, setDesc] = useState("")
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [occup, setOccup] = useState("");
+  const [email, setEmail] = useState("");
+  const [pnumber, setPnumber] = useState(null);
+  const [desc, setDesc] = useState("");
+  const [tag, setTag] = useState([]);
 
-  const dispatch = useDispatch()
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
   // const user = useSelector(state => state.user);
-
-  // net code to post to server
-
-  // const HOST = "http://localhost:8000/contacts";
-  const HOST = "http://localhost:5000/contacts";
 
   // reset inputs
   function resetInput(){
@@ -33,8 +31,10 @@ function ContactForm({open, onClose}) {
     setEmail("");
     setPnumber(null);
     setDesc("");
+    setTag([]);
   }
 
+  // net code to post to server
   // submit new contact to state and server
   function submitContact(){
 
@@ -48,42 +48,21 @@ function ContactForm({open, onClose}) {
       alert("Email not valid, please retry");
     }
     else{
-
-      // add new contact to backend and return the new contact 
-      async function add() {
-        const res = await fetch(HOST, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-            // TODO: user header
-            // "User": user
-          },
-          body: JSON.stringify({
-            firstName: fname,
-            lastName: lname,
-            occupation: occup,
-            email: email,
-            phone: pnumber,
-            tag: [],
-            description: desc
-          })
-        });
-        
-        if(!res.ok){
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-
-        const data = await res.json()
-        return data;
-      };
-
       // call the add function and add new data to state 
-      async function getAdd(){
-        const data = await add();
+      async function add(){
+        const data = await Network.addContactNet(user,{
+          firstName: fname,
+          lastName: lname,
+          occupation: occup,
+          email: email,
+          phone: pnumber,
+          tag: tag,
+          description: desc
+        });
         dispatch(addContact(data));
       }
 
-      getAdd();      
+      add();      
 
       resetInput();
     }
@@ -138,6 +117,9 @@ function ContactForm({open, onClose}) {
         <textarea type="text" placeholder="Description" maxLength="500" value={desc} onChange={
           (e) => setDesc(e.target.value)
         }/>
+
+        <label>Tags</label>
+        <input type="text" placeholder="Tags(comma seperated) eg. A,B,C" value={tag} onChange={(e) => setTag(e.target.value.split(",")) } />
           
         <button onClick={()=>{
           submitContact();

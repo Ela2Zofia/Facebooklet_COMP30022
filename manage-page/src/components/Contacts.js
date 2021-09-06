@@ -6,48 +6,24 @@ import Topbar from '../page-components/Topbar'
 import setContacts from '../actions/setContacts'
 import endEdit from "../actions/endEdit"
 import clearSelected from "../actions/clearSelected"
+import Network from '../util/Network'
 import "../css/Contacts.css"
 
 function Contacts() {
 
-  // express address
-  // const HOST = "http://localhost:8000/contacts";
-
-  // json-server address
-  const HOST = "http://localhost:5000/contacts";
   const contacts = useSelector(state => state.contacts);
   const selected = useSelector(state => state.selected);
   const dispatch = useDispatch();
-  // const user = useSelector(state => state.user);
+
+  const user = useSelector(state => state.user);
   
 
   // net code to fetch contacts from the server
-  //
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json",
-
-      // TODO: user header
-      // "User": user
-    }
-  }
-  async function fetchContacts(){
-    const res = await fetch(HOST, requestOptions);
-
-    if(!res.ok){
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  }
   
   useEffect(()=>{
 
     async function getContacts(){
-      const serverData = await fetchContacts();
+      const serverData = await Network.fetchContactsNet(user);
       dispatch(setContacts(serverData))
     }
     getContacts();
@@ -57,10 +33,6 @@ function Contacts() {
     dispatch(endEdit());
     dispatch(clearSelected());
   }, [])
-
-
-  
-
 
 
   return (

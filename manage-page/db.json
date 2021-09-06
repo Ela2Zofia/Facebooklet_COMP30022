@@ -1,129 +1,131 @@
 {
-  "contacts": [{
-    "id": 1,
-    "firstName": "Derrick",
-    "lastName": "Li",
-    "occupation": "Google CEO",
-    "email": "hello@thisisapage.com",
-    "phone": 1145141919819,
-    "tag": [
-      "people",
-      "crazy_smart"
-    ],
-    "description": "Someone"
-  },
-  {
-    "id": 2,
-    "firstName": "Nikola",
-    "lastName": "Kovač",
-    "occupation": "G2 Player",
-    "email": "hello@juandeag.com",
-    "phone": 1145141919819,
-    "tag": [
-      "people"
-    ],
-    "description": "Best AKer"
-  },
-  {
-    "id": 3,
-    "firstName": "Kenny",
-    "lastName": "Schrub",
-    "occupation": "G2 Streamer",
-    "email": "hello@fastasfuckboi.com",
-    "phone": 1145141919819,
-    "tag": [
-      "people"
-    ],
-    "description": "Fastest AWPer"
-  },
-  {
-    "firstName": "Lionel",
-    "lastName": "Messi",
-    "occupation": "Football Player",
-    "email": "",
-    "phone": null,
-    "tag": [],
-    "description": "the best in the world",
-    "id": 4
-  },
-  {
-    "firstName": "Daniel",
-    "lastName": "Ricciardo",
-    "occupation": "F1 Driver",
-    "email": "",
-    "phone": null,
-    "tag": [],
-    "description": "honey badger",
-    "id": 5
-  },
-  {
-    "firstName": "Kimi",
-    "lastName": "Räikkönen",
-    "occupation": "F1 Driver",
-    "email": "",
-    "phone": null,
-    "tag": [],
-    "description": "ice man",
-    "id": 6
-  },
-  {
-    "firstName": "Leon",
-    "lastName": "Sterling",
-    "occupation": "Lecturer",
-    "email": "",
-    "phone": null,
-    "tag": [],
-    "description": "IT project",
-    "id": 7
-  },
-  {
-    "firstName": "Fernando",
-    "lastName": "Alonso",
-    "occupation": "F1 Driver",
-    "email": "",
-    "phone": null,
-    "tag": [],
-    "description": "GP2 ENGINE, GP2, AHHHHH!",
-    "id": 8
-  },
-  {
-    "firstName": "Chandler",
-    "lastName": "Bing",
-    "occupation": "don't know",
-    "email": "",
-    "phone": null,
-    "tag": [],
-    "description": "Friends",
-    "id": 9
-  },
-  {
-    "firstName": "Wraith",
-    "lastName": "",
-    "occupation": "Science Pilot",
-    "email": "",
-    "phone": null,
-    "tag": [],
-    "description": "qqqqqqqqqq",
-    "id": 10
-  },
-  {
-    "firstName": "Jack",
-    "lastName": "Cooper",
-    "occupation": "Titan Pilot",
-    "email": "",
-    "phone": null,
-    "tag": [],
-    "description": "BTTTTTTTTTTTTTTTT!",
-    "id": 11
-  },
-  {
-    "firstName": "Jiawei",
-    "lastName": "Li",
-    "occupation": "Student",
-    "email": "derrickli824@gmail.com",
-    "phone": "+61450205002",
-    "tag": [],
-    "description": "best programmer --- in the world",
-    "id": 12
-  }]
+  "contacts": [
+    {
+      "id": 1,
+      "firstName": "Derrick",
+      "lastName": "Li",
+      "occupation": "Google CEO",
+      "email": "hello@thisisapage.com",
+      "phone": 1145141919819,
+      "tag": [
+        "people",
+        "crazy_smart"
+      ],
+      "description": "Someone"
+    },
+    {
+      "id": 2,
+      "firstName": "Nikola",
+      "lastName": "Kovač",
+      "occupation": "G2 Player",
+      "email": "hello@juandeag.com",
+      "phone": 1145141919819,
+      "tag": [
+        "people"
+      ],
+      "description": "Best AKer"
+    },
+    {
+      "id": 3,
+      "firstName": "Kenny",
+      "lastName": "Schrub",
+      "occupation": "G2 Streamer",
+      "email": "hello@fastasfuckboi.com",
+      "phone": 1145141919819,
+      "tag": [
+        "people"
+      ],
+      "description": "Fastest AWPer"
+    },
+    {
+      "firstName": "Lionel",
+      "lastName": "Messi",
+      "occupation": "Football Player",
+      "email": "",
+      "phone": null,
+      "tag": [],
+      "description": "the best in the world",
+      "id": 4
+    },
+    {
+      "firstName": "Daniel",
+      "lastName": "Ricciardo",
+      "occupation": "F1 Driver",
+      "email": "",
+      "phone": null,
+      "tag": [],
+      "description": "honey badger",
+      "id": 5
+    },
+    {
+      "firstName": "Kimi",
+      "lastName": "Räikkönen",
+      "occupation": "F1 Driver",
+      "email": "",
+      "phone": null,
+      "tag": [],
+      "description": "ice man",
+      "id": 6
+    },
+    {
+      "firstName": "Leon",
+      "lastName": "Sterling",
+      "occupation": "Lecturer",
+      "email": "",
+      "phone": null,
+      "tag": [],
+      "description": "IT project",
+      "id": 7
+    },
+    {
+      "firstName": "Fernando",
+      "lastName": "Alonso",
+      "occupation": "F1 Driver",
+      "email": "",
+      "phone": null,
+      "tag": [],
+      "description": "GP2 ENGINE, GP2, AHHHHH!",
+      "id": 8
+    },
+    {
+      "firstName": "Chandler",
+      "lastName": "Bing",
+      "occupation": "don't know",
+      "email": "",
+      "phone": null,
+      "tag": [],
+      "description": "Friends",
+      "id": 9
+    },
+    {
+      "firstName": "Wraith",
+      "lastName": "",
+      "occupation": "Science Pilot",
+      "email": "",
+      "phone": null,
+      "tag": [],
+      "description": "qqqqqqqqqq",
+      "id": 10
+    },
+    {
+      "firstName": "Jack",
+      "lastName": "Cooper",
+      "occupation": "Titan Pilot",
+      "email": "",
+      "phone": null,
+      "tag": [],
+      "description": "BTTTTTTTTTTTTTTTT!",
+      "id": 11
+    },
+    {
+      "firstName": "Jiawei",
+      "lastName": "Li",
+      "occupation": "Student",
+      "email": "derrickli824@gmail.com",
+      "phone": "+61450205002",
+      "tag": [],
+      "description": "best programmer --- in the world",
+      "id": 12
+    }
+  ]
 }

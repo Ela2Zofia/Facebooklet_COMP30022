@@ -1,8 +1,12 @@
 import reactDom from "react-dom"
 import {TiDeleteOutline} from "react-icons/ti"
 import {RiCloseLine} from "react-icons/ri"
+import { useState } from "react";
 
 function ContactInfo({open, contact, onClose}) {
+  const [edit, setEdit] = useState(false);
+
+
   if (!open) return null;
   return reactDom.createPortal(
     <div className="ContactInfoWrapper">
@@ -31,6 +35,7 @@ function ContactInfo({open, contact, onClose}) {
           </div>
           
         </div>
+
       </div>
 
     </div>

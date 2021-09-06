@@ -1,6 +1,6 @@
 .Topbar{
     width:calc(100% - 2*20px);
-    height: 55px;
+    min-height: 55px;
     padding: 5px 20px;
     display: flex;
     flex-direction: row;
@@ -8,7 +8,7 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px grey;
-
+    z-index: 100;
     background-color: white;
 }
 
@@ -42,6 +42,20 @@
 #Manage:hover{
     background-color: whitesmoke;
 }
+
+#Delete{
+    border: none;
+    height: 30px;
+    background-color: white;
+    font-size: medium;
+    color: red;
+    cursor: pointer;
+}
+
+#Delete:hover{
+    background-color: whitesmoke;
+}
+
 
 .ContactFormWrapper{
     position: fixed;
@@ -117,7 +131,8 @@
     font-size: large;
     border: none;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    font-family: inherit;
 }
 
 .PhoneInputInput{
@@ -126,7 +141,7 @@
 
 .ContactForm textarea{
     width: 40%;
-    height: 10%;
+    height: 8%;
     font-size: large;
     border: none;
     border-radius: 5px;

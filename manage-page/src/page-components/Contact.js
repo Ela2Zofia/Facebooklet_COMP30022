@@ -1,11 +1,11 @@
 import {RiMoreLine} from "react-icons/ri";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import ContactInfo from "./ContactInfo";
 import { useSelector, useDispatch } from "react-redux";
 import addSelected from "../actions/addSelected";
 import removeSelected from "../actions/removeSelected";
 
-function Contact({id, contact, isSelected}) {
+function Contact({contact, isSelected}) {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
 

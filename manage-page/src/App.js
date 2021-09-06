@@ -4,9 +4,9 @@ import Home from './components/Home';
 import Contacts from './components/Contacts';
 import Meetings from './components/Meetings';
 import Sidebar from './page-components/Sidebar';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import Calendar from './components/Calendar';
-
+import PrivateRoute from './util/PrivateRoute';
 
 function App() {
 
@@ -36,12 +36,27 @@ function App() {
     <div className="App">
 
         <Router className="Router">
-          <Sidebar onClick={checkActive}/>
-          
+
+          <Route path={["/home","/contacts","/meetings", "/calendar"]}>
+            <Sidebar onClick={checkActive}/>
+          </Route>
+
           <div>
             <Switch>
 
-              <Route exact path={["/home","/"]}>
+              <PrivateRoute component={Home} path="/home"/> 
+
+              <PrivateRoute component={Contacts} path="/contacts"/> 
+
+              <PrivateRoute component={Meetings} path="/meetings"/> 
+
+              <PrivateRoute component={Calendar} path="/calendar"/> 
+              
+              <Route path="/signin">
+                <h1>Plz sign in?</h1>
+              </Route>
+              
+              {/* <Route path="/home">
                 <Home />
               </Route>
 
@@ -55,7 +70,8 @@ function App() {
 
               <Route exact path="/calendar">
                 <Calendar />
-              </Route>
+              </Route> */}
+
             </Switch>
           </div>
           {/* <Footer /> */}

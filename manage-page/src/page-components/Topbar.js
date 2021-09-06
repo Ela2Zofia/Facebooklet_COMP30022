@@ -7,6 +7,7 @@ import "../css/Topbar.css";
 import toggleEdit from "../actions/toggleEdit"
 import clearSelected from "../actions/clearSelected";
 import deleteContact from "../actions/deleteContact";
+import Network from "../util/Network";
 
 function Topbar() {
   
@@ -14,6 +15,7 @@ function Topbar() {
   const dispatch = useDispatch();
   const isEdit = useSelector(state => state.isEdit);
   const selected = useSelector(state => state.selected);
+  const user = useSelector(state => state.user);
 
   // const user = useSelector(state => state.user);
   
@@ -21,27 +23,9 @@ function Topbar() {
   // delete all selected contacts
   async function deleteSelected(){
     
-    // net code to delete a contact
-    async function del(id){
-      const HOST = `http://localhost:5000/contacts/${id}`
-      const res = await fetch(HOST, {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-          // TODO: user header
-          // "User": user
-        }
-      });
-
-      if(!res.ok){
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-    };
-
-
     // delete selected contacts from both front and backend
     for (let i in selected){  
-      await del(selected[i]);
+      await Network.delContactNet(user, selected[i]);
       dispatch(deleteContact(selected[i]));
     }
 
@@ -62,19 +46,21 @@ function Topbar() {
               <ContactForm open={isOpen} onClose={()=>setIsOpen(false)}></ContactForm>
 
             </div>
-          
-            <button id="Manage" onClick={
-                ()=>{
-                  dispatch(toggleEdit()); 
-                  dispatch(clearSelected());
-                }
-              }>Manage</button>
-            {
-              isEdit
-              ? 
-                <button onClick={()=>{deleteSelected()}}>Delete</button>
-              : ""
-            }
+
+            <div>
+              <button id="Manage" onClick={
+                  ()=>{
+                    dispatch(toggleEdit()); 
+                    dispatch(clearSelected());
+                  }
+                }>Manage</button>
+              {
+                isEdit
+                ? 
+                  <button id="Delete" onClick={()=>{deleteSelected()}}>Delete</button>
+                : ""
+              }
+            </div>
           </Route>
         </Switch>
 
