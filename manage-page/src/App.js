@@ -1,33 +1,38 @@
 import './css/App.css';
+import "./css/Container.css";
 import React, { useState } from 'react';
 import Home from './components/Home';
 import Contacts from './components/Contacts';
 import Meetings from './components/Meetings';
 import Sidebar from './page-components/Sidebar';
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import Calendar from './components/Calendar';
 import PrivateRoute from './util/PrivateRoute';
+import Header from './page-components/Header';
+import Login from "./components/Login";
+import Register from "./components/Register";
+import ForgetPassword from "./components/ForgetPassword";
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 function App() {
 
-  const [user, setUser] = useState("");
+  const [ user, setUser ] = useState( "" );
 
   // const [ contacts, setContacts] = useState([])
-  
-  
-  function checkActive(link){
-    const react_links = document.getElementsByClassName("SidebarItem");
-    
-    for(let i in react_links){
-      
-      if(typeof(react_links[i])==="object"){
-        if (react_links[i].dataset.url === link){
-          react_links[i].setAttribute("id", "active");
-        }else{
-          react_links[i].setAttribute("id", "");
+
+
+  function checkActive( link ) {
+    const react_links = document.getElementsByClassName( "SidebarItem" );
+
+    for ( let i in react_links ) {
+
+      if ( typeof ( react_links[ i ] ) === "object" ) {
+        if ( react_links[ i ].dataset.url === link ) {
+          react_links[ i ].setAttribute( "id", "active" );
+        } else {
+          react_links[ i ].setAttribute( "id", "" );
         }
       }
-      
+
     }
   };
 
@@ -35,49 +40,41 @@ function App() {
   return (
     <div className="App">
 
-        <Router className="Router">
+      <Router className="Router">
 
-          <Route path={["/home","/contacts","/meetings", "/calendar"]}>
-            <Sidebar onClick={checkActive}/>
-          </Route>
+        <Route path={ [ "/home", "/contacts", "/meetings", "/calendar" ] }>
+          <Sidebar onClick={ checkActive } />
+        </Route>
 
-          <div>
-            <Switch>
+        <Route path={ [ "/forgot", "/login", "/regist" ] }>
+          <Header />
+        </Route>
 
-              <PrivateRoute component={Home} path="/home"/> 
+        <div>
+          <Switch>
 
-              <PrivateRoute component={Contacts} path="/contacts"/> 
+            <PrivateRoute component={ Home } path="/home" />
 
-              <PrivateRoute component={Meetings} path="/meetings"/> 
+            <PrivateRoute component={ Contacts } path="/contacts" />
 
-              <PrivateRoute component={Calendar} path="/calendar"/> 
-              
-              <Route path="/signin">
-                <h1>Plz sign in?</h1>
-              </Route>
-              
-              {/* <Route path="/home">
-                <Home />
-              </Route>
+            <PrivateRoute component={ Meetings } path="/meetings" />
 
-              <Route path="/contacts">
-                <Contacts />
-              </Route>
+            <PrivateRoute component={ Calendar } path="/calendar" />
 
-              <Route exact path="/meetings">
-                <Meetings />
-              </Route>
+            <Route path="/forgot" component={ ForgetPassword } />
 
-              <Route exact path="/calendar">
-                <Calendar />
-              </Route> */}
+            <Route path="/login" component={ Login } exact />
 
-            </Switch>
-          </div>
-          {/* <Footer /> */}
-        </Router>
+            <Route path="/regist" component={ Register } />
 
-        
+            <Redirect to="/login" />
+
+          </Switch>
+        </div>
+        {/* <Footer /> */ }
+      </Router>
+
+
     </div>
   );
 }
