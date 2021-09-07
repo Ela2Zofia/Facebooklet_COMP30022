@@ -21,6 +21,7 @@ function Contact({contact, isSelected}) {
   }
 
 
+  // check if page is in edit mode, if yes, display a tickbox
   function checkEdit(){
     if (isEdit){
       return (

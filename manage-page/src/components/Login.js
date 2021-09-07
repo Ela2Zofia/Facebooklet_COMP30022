@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import logIn from "../actions/logIn";
@@ -34,8 +34,9 @@ function Login() {
   
   const handleSubmit = ( event ) => {
     event.preventDefault();
-    console.log( username )
+    // console.log( username )
     setSuccess(true);
+    localStorage.setItem("user", username);
     dispatch( logIn( username ) );
 
     // TODO: 

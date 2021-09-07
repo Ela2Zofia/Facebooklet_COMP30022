@@ -1,12 +1,15 @@
 import './css/App.css';
 import "./css/Container.css";
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import logIn from './actions/logIn';
 import Home from './components/Home';
 import Contacts from './components/Contacts';
 import Meetings from './components/Meetings';
 import Sidebar from './page-components/Sidebar';
 import Calendar from './components/Calendar';
 import PrivateRoute from './util/PrivateRoute';
+import PublicRoute from './util/PublicRoute';
 import Header from './page-components/Header';
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -15,10 +18,13 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 function App() {
 
-  const [ user, setUser ] = useState( "" );
-
-  // const [ contacts, setContacts] = useState([])
-
+  const dispatch = useDispatch();
+  const user = useSelector(state=>state.user);
+  function checkStorage(){
+    if (localStorage.getItem("user")){
+      dispatch(logIn(localStorage.getItem("user")));
+    }
+  }
 
   function checkActive( link ) {
     const react_links = document.getElementsByClassName( "SidebarItem" );
@@ -35,6 +41,9 @@ function App() {
 
     }
   };
+
+  checkStorage();
+
 
 
   return (
@@ -53,21 +62,26 @@ function App() {
         <div>
           <Switch>
 
-            <PrivateRoute component={ Home } path="/home" />
+            <PrivateRoute component={ Home } restricted={user} path="/home" />
 
-            <PrivateRoute component={ Contacts } path="/contacts" />
+            <PrivateRoute component={ Contacts } restricted={user} path="/contacts" />
 
-            <PrivateRoute component={ Meetings } path="/meetings" />
+            <PrivateRoute component={ Meetings } restricted={user} path="/meetings" />
 
-            <PrivateRoute component={ Calendar } path="/calendar" />
+            <PrivateRoute component={ Calendar } restricted={user} path="/calendar" />
 
-            <Route path="/forgot" component={ ForgetPassword } />
+            <PublicRoute component={ ForgetPassword } restricted={user === ""} path="/forgot"  />
 
-            <Route path="/login" component={ Login } exact />
+            <PublicRoute component={ Login } restricted={user === ""} path="/login"  exact />
 
-            <Route path="/regist" component={ Register } />
+            <PublicRoute component={ Register } restricted={user === ""} path="/regist"  />
 
-            <Redirect to="/login" />
+            {
+              (localStorage.getItem("user") !== "")
+              ? <Redirect to="/home" />
+              : <Redirect to="/login" />
+            }
+            
 
           </Switch>
         </div>

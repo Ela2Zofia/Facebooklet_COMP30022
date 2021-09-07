@@ -3,7 +3,7 @@ class Network{
   // const HOST = "http://localhost:5000/contacts";
 
   static HOST_CONTACTS = "http://localhost:5000/contacts"
-  static HOST_CONTACTS = "http://localhost:5000/meetings"
+  static HOST_MEETINGS = "http://localhost:5000/meetings"
 
   static async addContactNet(user, contact) {
     const res = await fetch(this.HOST_CONTACTS, {

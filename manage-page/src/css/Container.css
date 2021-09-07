@@ -144,7 +144,8 @@ body {
 }
 
 .formRight form section button{
-    background: #1D9BF0;
+    /* background: #1D9BF0; */
+    background-color: #0aa8ad;
     border: none;
     width: 100%;
     padding: 10px 0;
@@ -154,7 +155,7 @@ body {
 }
 
 .formRight form section button:hover {
-    background: #1A8CD9;
+    background: #09858a;
 }
 
 .formRight form footer {

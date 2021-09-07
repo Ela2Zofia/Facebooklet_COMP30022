@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
+import SidebarItem from "./SidebarItem";
 
 const Sidebar = ({onClick}) => {
+  
   return (
     <div className="Sidebar">
       <ul className="SidebarList">
@@ -10,10 +12,7 @@ const Sidebar = ({onClick}) => {
         { SidebarData.map( ( val, key ) => {
           return (
             <Link key={key} to={val.link} className="ReactLink">
-              <button className="SidebarItem" id="" data-url={val.link} onClick={()=>{onClick(val.link)}}>
-                <div className="SidebarIcon">{ val.icon }</div>
-                <div className="SidebarTitle">{ val.title }</div>
-              </button>
+              <SidebarItem val={val} onClick={onClick}/>
             </Link>
 
           );

@@ -8,6 +8,8 @@ function ContactInfo({open, contact, onClose}) {
 
 
   if (!open) return null;
+
+  // create a protal that display a modal (pop-up window)
   return reactDom.createPortal(
     <div className="ContactInfoWrapper">
 
