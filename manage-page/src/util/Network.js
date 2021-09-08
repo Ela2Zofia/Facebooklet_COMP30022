@@ -76,7 +76,28 @@ class Network{
     if(!res.ok){
       throw new Error(`HTTP error! status: ${res.status}`);
     }
+  };
+
+  static async searchContactNet(user, text){
+    const HOST = this.HOST_CONTACTS + "?_sort=firstName&q=" + text;
+    const res = await fetch(HOST, {
+      method: "GET",
+      headers:{
+        "Content-type": "application/json",
+        // TODO: user header
+        "User": user
+      },
+    })
+
+    if(!res.ok){
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const data = await res.json();
+    // console.log(data);
+    return data;
   }
+
 
 }
 

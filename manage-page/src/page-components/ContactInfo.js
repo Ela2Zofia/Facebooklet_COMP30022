@@ -1,7 +1,7 @@
 import reactDom from "react-dom"
 import { RiCloseLine } from "react-icons/ri"
 import { useState } from "react";
-import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
+import PhoneInput from "react-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
 import editContact from "../actions/editContact";
 import Network from "../util/Network";
@@ -36,7 +36,7 @@ function ContactInfo( { open, contact, onClose } ) {
     }
   }
 
-
+  // submit edited contact
   function submit() {
     // eslint-disable-next-line
     const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -47,8 +47,9 @@ function ContactInfo( { open, contact, onClose } ) {
     else if ( email && !re.test( String( email ).toLocaleLowerCase() ) ) {
       alert( "Email not valid, please retry" );
     } else {
+
       async function edit() {
-        const data = await Network.editContactNet( user, {
+        await Network.editContactNet( user, {
           id: contact.id,
           firstName: fname,
           lastName: lname,
@@ -61,6 +62,7 @@ function ContactInfo( { open, contact, onClose } ) {
       }
 
       edit();
+      
       dispatch( editContact(
         {
           id: contact.id,
@@ -112,7 +114,7 @@ function ContactInfo( { open, contact, onClose } ) {
         <div className="ContactInfoInnerWrap">
 
           <div className="ContactEdit">
-            
+
             <label>First Name</label>
             <input type="text" placeholder="First name **MANDATORY**" maxLength="30" value={ fname } onChange={
               ( e ) => setFname( e.target.value )
@@ -148,6 +150,7 @@ function ContactInfo( { open, contact, onClose } ) {
 
             <label>Tags</label>
             <input type="text" placeholder="Tags(comma seperated) eg. A,B,C" value={ tag.toString() } onChange={(e)=>{checkTag(e.target.value)}} />
+
             <button onClick={ submit }>Save</button>
 
           </div>
