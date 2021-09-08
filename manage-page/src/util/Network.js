@@ -25,7 +25,8 @@ class Network{
   };
 
   static async fetchContactsNet(user){
-    const res = await fetch(this.HOST_CONTACTS, {
+    const HOST = this.HOST_CONTACTS+"?_sort=firstName";
+    const res = await fetch(HOST, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -59,6 +60,23 @@ class Network{
       throw new Error(`HTTP error! status: ${res.status}`);
     }
   };
+
+  static async editContactNet(user, contact){
+    const HOST = this.HOST_CONTACTS + "/" +contact.id;
+    const res = await fetch(HOST, {
+      method: "PUT",
+      headers:{
+        "Content-type": "application/json",
+        // TODO: user header
+        "User": user
+      },
+      body: JSON.stringify(contact)
+    })
+
+    if(!res.ok){
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+  }
 
 }
 

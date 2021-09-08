@@ -8,7 +8,7 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px grey;
-    z-index: 100;
+    z-index: 0;
     background-color: white;
 }
 
@@ -78,7 +78,7 @@
     left: 25%;
     border-radius: 10px;
     box-shadow: 0 5px 10px rgb(197, 197, 197);
-    font-size: x-large;
+    font-size: larger;
     line-height: 1.5;
     overflow-y: auto;
 }
@@ -114,6 +114,7 @@
     font-size: large;
     font-weight: bold;
     background-color: rgb(30, 199, 30);
+    cursor: pointer;
 }
 
 .ContactForm button:hover{

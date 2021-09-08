@@ -34,6 +34,16 @@ function ContactForm({open, onClose}) {
     setTag([]);
   }
 
+  // check for emtpty tag
+  function checkTag(target){
+    if(target.trim() === ""){
+      setTag([])
+      
+    }else{
+      setTag(target.split(","))
+    }
+  }
+
   // net code to post to server
   // submit new contact to state and server
   function submitContact(){
@@ -109,9 +119,6 @@ function ContactForm({open, onClose}) {
           value={pnumber}
           onChange={setPnumber}
         />
-        {/* <input type="tel" placeholder="Phone number" maxLength="20" value={pnumber} onChange={
-          (e) => setPnumber(e.target.value)
-        } /> */}
 
         <label>Description</label>
         <textarea type="text" placeholder="Description" maxLength="500" value={desc} onChange={
@@ -119,7 +126,7 @@ function ContactForm({open, onClose}) {
         }/>
 
         <label>Tags</label>
-        <input type="text" placeholder="Tags(comma seperated) eg. A,B,C" value={tag} onChange={(e) => setTag(e.target.value.split(",")) } />
+        <input type="text" placeholder="Tags(comma seperated) eg. A,B,C" value={tag} onChange={(e) => checkTag(e.target.value) } />
           
         <button onClick={()=>{
           submitContact();
