@@ -87,6 +87,33 @@ app.post("/register", async function (req, res) {
   addInDb(username, md5(password), email);
 });
 
+app.post("/forgot", async function (req, res) {
+  var email = req.body.email;
+  const back = JSON.stringify({ isCorrect: true });
+  const data = await checkDb(email);
+  const randomNumber = Math.floor(Math.random() * 999999999) + 10000000;
+  if (data.length !== 0) {
+    var mailOptions = {
+      from: "itprojectexample.com",
+      to: email,
+      subject: "Your verification code",
+      text: randomNumber.toString(),
+    }
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        res.send(error);
+      } else {
+        console.log("Email sent!");
+        res.send(back);
+      }
+    })
+    //rederict 
+  }else{
+    res.send(false);
+    console.log("Email address is not found!");
+  }
+});
+
 app.listen(8000, () => {
   console.log("The server is ON, port 8000 is listening");
 });
