@@ -36,7 +36,7 @@ function Login() {
     event.preventDefault();
     // console.log( username )
     setSuccess(true);
-    localStorage.setItem("user", username);
+    sessionStorage.setItem("user", username);
     dispatch( logIn( username ) );
 
     // TODO: 
