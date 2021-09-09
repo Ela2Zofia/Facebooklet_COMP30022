@@ -1,0 +1,183 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.App {
+    /* border: 1px solid black; */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+footer {
+    font-size:medium;
+    padding: 0.1vh;
+}
+
+.Sidebar{
+    margin: 0;
+    background-color: #0aa8ad;
+    width: 100px;
+    height: 100vh;
+    position:fixed;
+}
+
+.SidebarList{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    list-style-type: none;
+    flex-direction: column;
+    
+}
+
+.SidebarItem{
+    background-color: #0aa8ad;
+    width: 100%;
+    margin: 0;
+    height: 20vh;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+    border: none;
+
+    animation-duration: 0.5s;
+    animation-name: fadeout;
+    
+}
+
+.SidebarItem:hover{
+    background-color: #098e92;
+    cursor: pointer;
+    animation-duration: 0.5s;
+    animation-name: fadein;
+}
+
+#active{
+    background-color: whitesmoke;
+    animation: none;
+}
+
+
+@keyframes fadein {
+    from{
+        background-color: #0aa8ad;
+    }
+
+    to {
+        background-color: #098e92;
+    }
+}
+
+@keyframes fadeout {
+    from{
+        background-color: #098e92;
+        
+    }
+
+    to {
+        background-color: #0aa8ad;
+    }
+}
+
+.ReactLink{
+    color: black;
+    text-decoration: none;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size:larger;
+}
+
+.Container {
+    /* border: 1px solid black; */
+    height: 100vh;
+    width: calc(100vw - 100px);
+    padding-left: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.InnerContainer{
+    /* border: 1px solid black; */
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    overflow: auto;
+}
+
+
+.User{
+    width: 100%;
+    height: 30%;
+    background-image: url("https://lp-cms-production.imgix.net/2019-06/ac5fff32f9e9dd4bfcc6302ad59c03f7e4a388f870f5d694dc8cd4c48d37272e.jpg?auto=format&fit=crop&ixlib=react-8.6.4&h=520&w=1312");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgb(206, 206, 206); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 -10px 5px rgba(0, 0, 0, 0.281) inset;
+    
+}
+
+#Avatar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid black;
+    height: 100px;
+    width: 100px;
+    border-radius: 60px;
+    background-color: rgba(177, 177, 177, 0.575);
+}
+
+

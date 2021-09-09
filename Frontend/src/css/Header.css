@@ -1,0 +1,27 @@
+#welcomeHeader{
+    /* 设置宽度高度背景颜色 */
+    height: 55px;
+    width:100%;
+    /* background:#1D9BF0; */
+    
+    background-color: #0aa8ad;
+    position: fixed; /*固定在顶部*/
+    top: 0;/*离顶部的距离为0*/
+    left:0;
+    display: block;
+    text-align:left;
+    opacity: 0.9;
+}
+
+.icon{
+    height: 55px;
+    margin-right: 25px;
+}
+
+.slogan{
+    color: #FFF;
+    display:inline-block;
+    position: relative;
+    top:-20px;
+
+}
