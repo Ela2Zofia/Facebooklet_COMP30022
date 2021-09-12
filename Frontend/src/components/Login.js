@@ -35,7 +35,9 @@ function Login() {
   const handleSubmit = ( event ) => {
     event.preventDefault();
     // console.log( username )
-    
+    // dispatch(logIn(username));
+    // setSuccess(true);
+    // sessionStorage.setItem("user", username);
 
     // TODO: 
     if (validate(username,password)) {

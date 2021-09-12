@@ -98,7 +98,7 @@ function ContactInfo( { open, contact, onClose } ) {
 
             <div className="Tags">
               { contact.tag.map( ( tag, key ) => {
-                return (
+                return (  
                   <div key={ key } className="Tag">{ tag }</div>
                 )
               } ) }
