@@ -62,7 +62,7 @@ class Network{
   };
 
   static async editContactNet(user, contact){
-    const HOST = this.HOST_CONTACTS + "/" +contact.id;
+    const HOST = this.HOST_CONTACTS + "/" +contact._id;
     const res = await fetch(HOST, {
       method: "PUT",
       headers:{

@@ -14,9 +14,9 @@ function Contact({contact, isSelected}) {
   function changeSelected(){
     
     if (!isSelected){
-      dispatch(addSelected(contact.id));
+      dispatch(addSelected(contact._id));
     }else{
-      dispatch(removeSelected(contact.id));
+      dispatch(removeSelected(contact._id));
     }
   }
 

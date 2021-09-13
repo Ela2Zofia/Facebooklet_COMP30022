@@ -4,14 +4,14 @@ function contactReducer(state = [], action) {
     case "ADD_CONTACT":
       return [...state, action.payload]
     case "DELETE_CONTACT":
-      return state.filter(contact => contact.id !== action.payload)
+      return state.filter(contact => contact._id !== action.payload)
     case "SET_CONTACTS":
       return action.payload
     case "EDIT_CONTACT":
       var state_copy = state;
 
       for(let i in state_copy){
-        if (state_copy[i].id === action.payload.id){
+        if (state_copy[i]._id === action.payload._id){
           state_copy[i].firstName = action.payload.firstName;
           state_copy[i].lastName = action.payload.lastName;
           state_copy[i].occupation = action.payload.occupation;
