@@ -21,8 +21,8 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector(state=>state.user);
   function checkStorage(){
-    if (sessionStorage.getItem("user")){
-      dispatch(logIn(sessionStorage.getItem("user")));
+    if (localStorage.getItem("user")){
+      dispatch(logIn(localStorage.getItem("user")));
     }
   }
 
@@ -77,7 +77,7 @@ function App() {
             <PublicRoute component={ Register } restricted={user === ""} path="/regist"  />
 
             {
-              (sessionStorage.getItem("user") !== "")
+              (localStorage.getItem("user") !== "")
               ? <Redirect to="/home" />
               : <Redirect to="/login" />
             }
