@@ -32,6 +32,7 @@ function Contacts() {
     //
     dispatch(endEdit());
     dispatch(clearSelected());
+      // eslint-disable-next-line
   }, [])
 
 

@@ -14,6 +14,7 @@ import Header from './page-components/Header';
 import Login from "./components/Login";
 import Register from "./components/Register";
 import ForgetPassword from "./components/ForgetPassword";
+import Reset from "./components/Reset"
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 function App() {
@@ -55,7 +56,7 @@ function App() {
           <Sidebar onClick={ checkActive } />
         </Route>
 
-        <Route path={ [ "/forgot", "/login", "/regist" ] }>
+        <Route path={ [ "/forgot", "/login", "/regist", "/reset" ] }>
           <Header />
         </Route>
 
@@ -75,6 +76,8 @@ function App() {
             <PublicRoute component={ Login } restricted={user === ""} path="/login"  exact />
 
             <PublicRoute component={ Register } restricted={user === ""} path="/regist"  />
+
+              <PublicRoute component={ Reset } restricted={user === ""} path="/reset"  />
 
             {
               (sessionStorage.getItem("user") !== "")

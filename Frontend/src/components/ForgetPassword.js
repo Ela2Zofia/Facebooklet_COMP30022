@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
+import PubSub from 'pubsub-js'
 
 class ForgetPassword extends React.Component {
   state = {
@@ -34,8 +35,9 @@ class ForgetPassword extends React.Component {
         return response.json();
       } ).then( response => {
         if ( response.isCorrect ) {
-          alert( "Password have been sent to your mail" );
+          alert( "A verification code has been sent to your mail" );
           this.setState( { isSuccess: true } )
+            PubSub.publish("email sent",{email:email});
         }
         else {
           alert( "Can't find the email" );
@@ -46,7 +48,7 @@ class ForgetPassword extends React.Component {
 
   render() {
     if ( this.state.isSuccess ) {
-      return <Redirect to="/login" />
+      return <Redirect to="/reset" />
     } else {
       return (
         <div className="formContainerWrap">
@@ -78,5 +80,5 @@ class ForgetPassword extends React.Component {
     }
   }
 }
-
+// eslint-disable-next-line
 export default ForgetPassword
