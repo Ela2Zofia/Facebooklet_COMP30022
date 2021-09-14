@@ -20,7 +20,7 @@ const findUser = async (username, password) => {
 };
 
 const addInDb = async (username, password, email) => {
-  //创建用户
+  //create user
   const userdata = await User.create({
     username: username,
     password: password,

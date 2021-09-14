@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
 
-//引入redis-su
+//import redis-su
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
 // const { SuccessModel, ErrorModel } = require("./model/resModel");
 
-//把路由引用过来-su
+//import router-su
 const contactRouter = require("./routes/contact");
 
 var bodyParser = require("body-parser");
@@ -19,14 +19,14 @@ var transporter = nodemailer.createTransport({
     pass: "COMP30022",
   },
 });
-// 配置 body-parser 中间件（插件，专门用来解析表单 POST 请求体）
+// set body-parser middleware
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 const { findUser, checkDb, addInDb, checkDupl } = require("./controller/user");
 
-//使用redis存储数据-su
+//use redis store data-su
 const redisClient = require("./db/redis");
 const sessionStore = new RedisStore({
   client: redisClient,
@@ -35,9 +35,9 @@ app.use(
   session({
     secret: "WJiol#23123_",
     cookie: {
-      // path: '/', //默认配置
-      // httpOnly: true, //默认配置
-      //cookie在24小时后失效
+      // path: '/', 
+      // httpOnly: true, 
+      //cookie will be invalid after 24 hours
       maxAge: 24 * 60 * 60 * 1000,
     },
     store: sessionStore,
@@ -84,34 +84,6 @@ app.post("/login", async (request, response) => {
   console.log("user is not found!");
 });
 
-
-// app.get("/login-test", (req, res, next) => {
-//   console.log(req.session.username);
-//   if (req.session.username) {
-//     res.json({
-//       errno: 0,
-//       msg: '已登陆'
-//     })
-//     return;
-//   }
-//   res.json({
-//     errno: -1,
-//     msg: '未登陆'
-//   });
-// });
-
-// //测试session是否可用
-// app.get("/session-test", (req, res, next) => {
-//   const session = req.session;
-//   if (session.viewNum == null) {
-//     session.viewNum = 0;
-//   }
-//   session.viewNum++;
-//   res.json({
-//     viewNum: session.viewNum,
-//   });
-// });
-
 app.post("/register", async function (req, res) {
   var username = req.body.username;
   var email = req.body.email;
@@ -119,7 +91,7 @@ app.post("/register", async function (req, res) {
   console.log(password);
   const back = JSON.stringify({ isCorrect: true });
 
-  //再查一下有没有重名和重复邮箱的
+  //check the duplicate username or email
   const result = await checkDupl(username, email);
   // console.log(data);
   if (result) {
