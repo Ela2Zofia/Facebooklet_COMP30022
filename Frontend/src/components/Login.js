@@ -35,11 +35,12 @@ function Login() {
   const handleSubmit = ( event ) => {
     event.preventDefault();
     // console.log( username )
+
     // dispatch(logIn(username));
     // setSuccess(true);
     // sessionStorage.setItem("user", username);
 
-    // TODO: 
+    
     if (validate(username,password)) {
         fetch('http://127.0.0.1:8000/login', {
                 //请求方法
@@ -53,8 +54,6 @@ function Login() {
             if (response.isCorrect){
                 // Log in
                 dispatch(logIn(username));
-                setSuccess(true);
-                sessionStorage.setItem("user", username);
             }
             else{
                 alert("Your username or password is incorrect");

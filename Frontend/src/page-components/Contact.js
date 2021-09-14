@@ -11,12 +11,13 @@ function Contact( { contact, isSelected } ) {
 
   const isEdit = useSelector( state => state.isEdit );
 
-  function changeSelected() {
 
-    if ( !isSelected ) {
-      dispatch( addSelected( contact.id ) );
-    } else {
-      dispatch( removeSelected( contact.id ) );
+  function changeSelected(){
+    
+    if (!isSelected){
+      dispatch(addSelected(contact._id));
+    }else{
+      dispatch(removeSelected(contact._id));
     }
   }
 
