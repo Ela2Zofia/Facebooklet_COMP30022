@@ -1,41 +1,65 @@
 const Contact = require("../db/models/Contact");
 
-const getList = async (author, keyword) => {
-    //动态拼接查询条件
-    const whereOpt = {};
-    if (author) {
-      whereOpt.author = author;
-    }
-    if (keyword) {
-      whereOpt.keyword = new RegExp(keyword);
-    }
-  
-    //按照id逆序代表按照创建时间逆序
-    const list = await Contact.find(whereOpt).sort({ _id: -1 });
-    return list;
-  };
-  
-  const getDetail = async (id) => {
-    const blog = await Contact.findById(id);
-  
-    //创建时间的格式化
-  
-    return blog;
-  };
-  
-  //blogData = {}代表如果blogData没有就给个空对象(ES6新语法)
-  const newContact = async (contactData = {}) => {
-    //blogData 是一个博客对象，包含title content 属性
-  
-    const firstName = contactData.firstName;
-    const lastName = contactData.lastName;
-    const occupation = contactData.Occupation;
-    const email = contactData.email;
-    const phone = contactData.phoneNumber;
-    const description = contactData.description;
-    const tag = contactData.tags;
-  
-    const contact = await Contact.create({
+const getList = async (userName,keyword) => {
+  //Dynamic stitching query condition
+  //fuzzy search
+  const whereOpt = {};
+  if (userName) {
+    whereOpt.belongsWho = userName;
+  }
+  if (keyword) {
+    whereOpt.searchInfo = { $regex: `${keyword}`, $options: "i" };
+  }
+
+  //a list of contacts that the USER has, sorted by firstName in alphabetical order (A-Z a-z)
+  const list = await Contact.find(whereOpt).sort({
+    firstName: 1,
+  });
+  return list;
+};
+
+//add new contact
+const newContact = async (userName, contactData = {}) => {
+  const firstName = contactData.firstName;
+  const lastName = contactData.lastName;
+  const occupation = contactData.occupation;
+  const email = contactData.email;
+  const phone = contactData.phone;
+  const description = contactData.description;
+  const tag = contactData.tag;
+  const searchInfo = firstName + " " + lastName + " " + tag.join(",") + " " + occupation;
+  const belongsWho = userName;
+
+  const contact = await Contact.create({
+    firstName,
+    lastName,
+    occupation,
+    email,
+    phone,
+    tag,
+    description,
+    searchInfo,
+    belongsWho,
+  });
+
+  console.log(contact);
+  return contact;
+};
+
+// update contact information
+const updateContact = async (id, contactData = {}) => {
+  const firstName = contactData.firstName;
+  const lastName = contactData.lastName;
+  const occupation = contactData.occupation;
+  const email = contactData.email;
+  const phone = contactData.phone;
+  const description = contactData.description;
+  const tag = contactData.tag;
+  const searchInfo = firstName + " " + lastName + " " + tag.join(",") + " " + occupation;
+
+  const contact = await Contact.findOneAndUpdate(
+    { _id: id },
+    {
       firstName,
       lastName,
       occupation,
@@ -43,49 +67,40 @@ const getList = async (author, keyword) => {
       phone,
       tag,
       description,
-    });
-  
-    console.log(contact);
-  
-    return {
-      id: contact._id,
-    };
-  };
-  
-  const updateBlog = async (id, blogData = {}) => {
-    //id就是要更新博客的id
-    //blogData 是一个博客对象，包含title content 属性
-    const title = blogData.title;
-    const content = blogData.content;
-  
-    const blog = await Contact.findOneAndUpdate(
-      { _id: id },
-      { title, content },
-      { new: true }
-    );
-  
-    if (blog == null) {
-      return false;
-    }
-    return true;
-  };
-  
-  const delBlog = async (id) => {
-    const blog = await Contact.findOneAndDelete({
-      _id: id,
-    });
-    console.log(blog);
-    if (blog == null) {
-      return false;
-    }
-    return true;
-  };
-  
-  module.exports = {
-    getList,
-    getDetail,
-    newContact,
-    updateBlog,
-    delBlog,
-  };
-  
+      searchInfo,
+    },
+    { new: true }
+  );
+
+  if (contact == null) {
+    return false;
+  }
+  return true;
+};
+
+//delete chosen contact
+const delContact = async (id) => {
+  const contact = await Contact.findOneAndDelete({
+    _id: id,
+  });
+  console.log(contact);
+};
+
+const searchContact = async (id) => {
+  const contact = await Contact.findOne({
+    _id: id,
+  });
+  console.log(contact);
+  if (contact == null) {
+    return false;
+  }
+  return true;
+};
+
+module.exports = {
+  getList,
+  newContact,
+  updateContact,
+  delContact,
+  searchContact,
+};

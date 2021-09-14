@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
 
-//引入redis-su
+//import redis-su
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
 // const { SuccessModel, ErrorModel } = require("./model/resModel");
 
-//把路由引用过来-su
+//import router-su
 const contactRouter = require("./routes/contact");
 
 var bodyParser = require("body-parser");
@@ -28,8 +28,7 @@ app.use(bodyParser.json());
 const { findUser, checkDb, addInDb, checkDupl, changePassword } = require("./controller/user");
 const { db } = require("./db/models/User");
 
-
-//使用redis存储数据-su
+//use redis store data-su
 const redisClient = require("./db/redis");
 const sessionStore = new RedisStore({
   client: redisClient,
@@ -38,9 +37,9 @@ app.use(
   session({
     secret: "WJiol#23123_",
     cookie: {
-      // path: '/', //默认配置
-      // httpOnly: true, //默认配置
-      //cookie在24小时后失效
+      // path: '/', 
+      // httpOnly: true, 
+      //cookie will be invalid after 24 hours
       maxAge: 24 * 60 * 60 * 1000,
     },
     store: sessionStore,
@@ -75,17 +74,18 @@ app.use(function (req, res, next) {
 app.post("/login", async (request, response) => {
   var username = request.body.username;
   var password = md5(request.body.password);
-  const back = JSON.stringify({ isCorrect: true });
+  // const back = JSON.stringify({ isCorrect: true });
   //   response.send(back);
   const data = await findUser(username, password);
   if (data) {
-    console.log("user found!");
-    //设置session
+    console.log("user found!: ", data.username);
+    //set session
     request.session.username = data.username;
     console.log(request.session.username);
-    return response.send(back);
+    response.json({ isCorrect: true });
+    return;
   }
-  response.send(false);
+  response.json(false);
   console.log("user is not found!");
 });
 
@@ -174,6 +174,11 @@ app.post("/reset", async function (req, res) {
     res.send(false);
   }
 })
+//register route
+app.use("/", contactRouter);
+// app.get("/contacts", (req, res, next) => {
+//   console.log("a");
+// });
 
 app.listen(8000, () => {
   console.log("The server is ON, port 8000 is listening");

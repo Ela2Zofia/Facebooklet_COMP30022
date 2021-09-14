@@ -9,70 +9,47 @@ var router = express.Router();
 //   });
 // });
 
-const { newContact } = require("../controller/contact");
-const { SuccessModel } = require("../model/resModel");
-//导出来直接是个函数，所以不用大括号{}
-const loginCheck = require("../middleware/loginCheck");
+const {
+  getList,
+  updateContact,
+  newContact,
+  delContact,
+} = require("../controller/contact");
 
-// router.get("/contacts", async (req, res, next) => {
-//   let contact = req.query.contact || "";
-//   const keyword = req.query.keyword || "";
+//get contact list, and implement the search function
+router.get("/contacts", async (req, res, next) => {
+  let belongsWho = req.headers.user || "";
+  // console.log(belongsWho);
+  // get the search text
+  const keyword = req.query.q || "";
 
-//   // if (req.query.contacts) {
-//   //   // 管理员界面
-//   //   if (req.session.username == null) {
-//   //     //未登录
-//   //     res.json(new ErrorModel("未登陆"));
-//   //     return;
-//   //   }
-//   //   // 强制查询自己的博客
-//   //   // contact = req.session.username;
-//   // }
-
-//   const listData = await getList(contact, keyword);
-//   // return result.then((listData) => {
-//   //   res.json(new SuccessModel(listData));
-//   // });
-//   console.log(new SuccessModel(listData));
-//   res.json(new SuccessModel(listData));
-//   return;
-// });
-
-router.post("/contacts", async (req, res, next) => {
-  console.log("a");
-  req.body.author = req.session.username;
-  const data = await newContact(req.body);
-  console.log(data);
-  res.json(new SuccessModel(data));
+  //get the contact list
+  const listData = await getList(belongsWho, keyword);
+  res.json(listData);
   return;
-
-  // req.body.author = req.session.username;
-  // const result = newBlog(req.body);
-  // return result.then(data=>{
-  //   res.json(new SuccessModel(data));
-  // });
 });
 
-// // router.put("/update", loginCheck, async (req, res, next) => {
-// //   const val = await updateBlog(req.query.id, req.body);
-// //   if (val) {
-// //     res.json(new SuccessModel(val));
-// //     return;
-// //   } else {
-// //     res.json(new ErrorModel("更新联系人失败"));
-// //   }
-// // });
+// add new contact
+router.post("/contacts", async (req, res, next) => {
+  const belongsWho = req.headers.user;
+  const data = await newContact(belongsWho, req.body);
+  console.log(data);
+  res.json(data);
+  return;
+});
 
-// // router.delete("/del", loginCheck, async (req, res, next) => {
-// //   const author = req.session.username;
-// //   const val = await delBlog(req.query.id, author);
-// //   console.log(val);
-// //   if (val) {
-// //     res.json(new SuccessModel(val));
-// //     return;
-// //   } else {
-// //     res.json(new ErrorModel("删除联系人失败"));
-// //   }
-// // });
+// update contact information
+router.put("/contacts/:id", async (req, res, next) => {
+  console.log(req.body._id);
+  await updateContact(req.body._id, req.body);
+  res.status(200).send();
+});
+
+//delete chosen contact
+router.delete("/contacts/:id", async (req, res, next) => {
+  const id = req.url.split("/")[2];
+  await delContact(id);
+  res.status(200).send();
+});
 
 module.exports = router;

@@ -1,4 +1,4 @@
-//对应contact集合
+//contact collection
 
 const mongoose = require("../db");
 // mongoose.set('useFindAndModify', false);
@@ -6,21 +6,20 @@ const mongoose = require("../db");
 const ContactSchema = mongoose.Schema({
   firstName: {
     type: String,
-    required: true, //这个是必须得有的
+    required: true, //must have firstName
   },
   lastName: {
     type: String,
-    required: true, //这个是必须得有的
   },
   occupation: String,
   email: {
     type: String,
-    required: true, //这个是必须得有的
-    unique: true, //唯一，不重复
   },
   phone: String,
-  tag: String,
+  tag: [],
   description: String,
+  searchInfo: String,
+  belongsWho: String
 });
 
 const Contact = mongoose.model("contact", ContactSchema);
