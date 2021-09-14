@@ -5,13 +5,13 @@
       "firstName": "Derrick",
       "lastName": "Li",
       "occupation": "Google CEO",
-      "email": "hello@thisisapage.com",
-      "phone": "1145141919819",
+      "email": "derrickli824@gmail.com",
+      "phone": "+61450205002",
       "tag": [
         "people",
         "crazy_smart"
       ],
-      "description": "Someone"
+      "description": "Some"
     },
     {
       "id": 2,
@@ -52,9 +52,20 @@
       "firstName": "Daniel",
       "lastName": "Ricciardo",
       "occupation": "F1 Driver",
-      "email": "",
+      "email": "hello@formula1.com",
       "phone": null,
-      "tag": [],
+      "tag": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "cedfefefdf",
+        "cdfefdfed",
+        "efasefasdfaesfes",
+        "adsfasdfasdfa",
+        "asdfasdfasdfasdfasdf",
+        "asdfasdfasdfasd"
+      ],
       "description": "honey badger"
     },
     {
@@ -98,16 +109,6 @@
       "description": "Friends"
     },
     {
-      "firstName": "Wraith",
-      "lastName": "",
-      "occupation": "Science Pilot",
-      "email": "",
-      "phone": null,
-      "tag": [],
-      "description": "qqqqqqqqqq",
-      "id": 10
-    },
-    {
       "firstName": "Jack",
       "lastName": "Cooper",
       "occupation": "Titan Pilot",
@@ -126,16 +127,6 @@
       "tag": [],
       "description": "best programmer --- in the world",
       "id": 12
-    },
-    {
-      "firstName": "test",
-      "lastName": "",
-      "occupation": "",
-      "email": "",
-      "phone": null,
-      "tag": [],
-      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu",
-      "id": 13
     }
   ]
 }
