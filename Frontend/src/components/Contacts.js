@@ -47,9 +47,9 @@ function Contacts() {
           (contact) =>{
             return(
             <Contact
-              key = {contact.id}
+              key = {contact._id}
               contact = {contact}
-              isSelected = {selected.includes(contact.id)}
+              isSelected = {selected.includes(contact._id)}
             />)
           }
         )}

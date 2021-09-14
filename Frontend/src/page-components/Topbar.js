@@ -90,6 +90,13 @@ function Topbar() {
               <input type="text" placeholder="Search..." value={searchText} onChange={(e)=>{setSearchText(e.target.value);setLoading(false)}}/>
             </div>
           </Route>
+
+          {/* <Route path="/meetings">
+            <div id="SearchBar">
+              <RiSearchLine />
+              <input type="text" placeholder="Search..." value={searchText} onChange={(e)=>{setSearchText(e.target.value);setLoading(false)}}/>
+            </div>
+          </Route> */}
         </Switch>
 
       </Router>

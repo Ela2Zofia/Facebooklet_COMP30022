@@ -2,8 +2,8 @@ class Network{
   // const HOST = "http://localhost:8000/contacts";
   // const HOST = "http://localhost:5000/contacts";
 
-  static HOST_CONTACTS = "http://localhost:5000/contacts"
-  static HOST_MEETINGS = "http://localhost:5000/meetings"
+  static HOST_CONTACTS = "http://localhost:8000/contacts"
+  static HOST_MEETINGS = "http://localhost:8000/meetings"
 
   static async addContactNet(user, contact) {
     const res = await fetch(this.HOST_CONTACTS, {
@@ -62,7 +62,7 @@ class Network{
   };
 
   static async editContactNet(user, contact){
-    const HOST = this.HOST_CONTACTS + "/" +contact.id;
+    const HOST = this.HOST_CONTACTS + "/" +contact._id;
     const res = await fetch(HOST, {
       method: "PUT",
       headers:{

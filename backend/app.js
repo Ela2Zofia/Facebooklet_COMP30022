@@ -1,5 +1,14 @@
 const express = require("express");
 const app = express();
+
+//引入redis-su
+const session = require("express-session");
+const RedisStore = require("connect-redis")(session);
+// const { SuccessModel, ErrorModel } = require("./model/resModel");
+
+//把路由引用过来-su
+const contactRouter = require("./routes/contact");
+
 var bodyParser = require("body-parser");
 var md5 = require("md5-node");
 var nodemailer = require("nodemailer");
@@ -20,23 +29,41 @@ const { findUser, checkDb, addInDb, checkDupl, changePassword } = require("./con
 const { db } = require("./db/models/User");
 
 
-
+//使用redis存储数据-su
+const redisClient = require("./db/redis");
+const sessionStore = new RedisStore({
+  client: redisClient,
+});
+app.use(
+  session({
+    secret: "WJiol#23123_",
+    cookie: {
+      // path: '/', //默认配置
+      // httpOnly: true, //默认配置
+      //cookie在24小时后失效
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+    store: sessionStore,
+  })
+);
 
 // michael's code
 app.use(function (req, res, next) {
-
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
   // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader("Access-Control-Allow-Headers", "*");
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader("Access-Control-Allow-Credentials", true);
 
   // Pass to next layer of middleware
   next();
@@ -53,6 +80,9 @@ app.post("/login", async (request, response) => {
   const data = await findUser(username, password);
   if (data) {
     console.log("user found!");
+    //设置session
+    request.session.username = data.username;
+    console.log(request.session.username);
     return response.send(back);
   }
   response.send(false);
@@ -74,11 +104,11 @@ app.post("/register", async function (req, res) {
     return res.send(false);
   }
   var mailOptions = {
-      from: "itprojectexample.com",
-      to: email,
-      subject: "Your Password",
-      text: password,
-    };
+    from: "itprojectexample.com",
+    to: email,
+    subject: "Your Password",
+    text: password,
+  };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       res.send(error);
@@ -106,7 +136,7 @@ app.post("/forgot", async function (req, res) {
       to: email,
       subject: text.concat(": Your verification code"),
       text: randomNumber.toString(),
-    }
+    };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         res.send(error);

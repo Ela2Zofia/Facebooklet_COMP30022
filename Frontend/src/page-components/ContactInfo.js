@@ -50,7 +50,7 @@ function ContactInfo( { open, contact, onClose } ) {
 
       async function edit() {
         await Network.editContactNet( user, {
-          id: contact.id,
+          _id: contact._id,
           firstName: fname,
           lastName: lname,
           occupation: occup,
@@ -65,7 +65,7 @@ function ContactInfo( { open, contact, onClose } ) {
       
       dispatch( editContact(
         {
-          id: contact.id,
+          _id: contact._id,
           firstName: fname,
           lastName: lname,
           occupation: occup,
@@ -98,7 +98,7 @@ function ContactInfo( { open, contact, onClose } ) {
 
             <div className="Tags">
               { contact.tag.map( ( tag, key ) => {
-                return (
+                return (  
                   <div key={ key } className="Tag">{ tag }</div>
                 )
               } ) }

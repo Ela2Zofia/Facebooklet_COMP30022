@@ -8,9 +8,9 @@ function Home() {
   const dispatch = useDispatch();
   const user = useSelector(state=>state.user);
 
-  // remove user record from redux and sessionStorage
+  // remove user record from redux and localStorage
   function removeUser(){
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("user");
     dispatch(signOut());
   }
 
