@@ -1,5 +1,6 @@
 const User = require("../db/models/User");
 
+// check whehther a user is in the database using email
 const checkDb = async (email) => {
   const data = await User.find({
     // username: req.body.username,
@@ -10,6 +11,7 @@ const checkDb = async (email) => {
   return data;
 };
 
+// check whether a user's in the database using username and password
 const findUser = async (username, password) => {
   const data = await User.findOne({
     username: username,
@@ -19,8 +21,9 @@ const findUser = async (username, password) => {
   return data;
 };
 
+// add user into database
 const addInDb = async (username, password, email) => {
-  //创建用户
+  // create user
   const userdata = await User.create({
     username: username,
     password: password,
@@ -29,6 +32,7 @@ const addInDb = async (username, password, email) => {
   //   console.log(userdata);
 };
 
+// check whether a user using duplicate username and email to register
 const checkDupl = async (username, email) => {
   const nameData = await User.findOne({
     username: username,
@@ -44,9 +48,22 @@ const checkDupl = async (username, email) => {
   return false;
 };
 
+// change the password using email verfication
+const changePassword = async (email, password) => {
+  const userData = await User.findOneAndUpdate({
+    email: email
+  }, {
+    $set: {
+      password: password
+    }
+  })
+  return userData;
+};
+
 module.exports = {
   checkDb,
   addInDb,
   checkDupl,
-  findUser
+  findUser,
+  changePassword
 };
