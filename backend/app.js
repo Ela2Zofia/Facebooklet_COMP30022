@@ -95,12 +95,16 @@ app.post("/forgot", async function (req, res) {
   var email = req.body.email;
   const back = JSON.stringify({ isCorrect: true });
   const data = await checkDb(email);
+  let text = "";
   const randomNumber = Math.floor(Math.random() * 999999999) + 10000000;
   if (data.length !== 0) {
+    for (let index = 0; index < data.length; index++) {
+      text += data[index].username;
+    }
     var mailOptions = {
       from: "itprojectexample.com",
       to: email,
-      subject: "Your verification code",
+      subject: text.concat(": Your verification code"),
       text: randomNumber.toString(),
     }
     transporter.sendMail(mailOptions, function (error, info) {
