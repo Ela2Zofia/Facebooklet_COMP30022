@@ -16,14 +16,16 @@ import Register from "./components/Register";
 import ForgetPassword from "./components/ForgetPassword";
 import Reset from "./components/Reset"
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import UserUtil from './util/UserUtil';
 
 function App() {
 
   const dispatch = useDispatch();
   const user = useSelector(state=>state.user);
   function checkStorage(){
-    if (localStorage.getItem("user")){
-      dispatch(logIn(localStorage.getItem("user")));
+    const user = UserUtil.getUser();
+    if (user !== null){
+      dispatch(logIn(user));
     }
   }
 
@@ -80,7 +82,7 @@ function App() {
               <PublicRoute component={ Reset } restricted={user === ""} path="/reset"  />
 
             {
-              (localStorage.getItem("user") !== "")
+              (UserUtil.getUser() !== null)
               ? <Redirect to="/home" />
               : <Redirect to="/login" />
             }

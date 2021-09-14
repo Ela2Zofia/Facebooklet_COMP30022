@@ -3,11 +3,15 @@ import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import logIn from "../actions/logIn";
+import UserUtil from "../util/UserUtil";
+
 function Login() {
 
+  const now = new Date();
   const [ username, setUsername ] = useState( "" );
   const [ password, setPassword ] = useState( "" );
-  const [ success, setSuccess] = useState(false);
+  const [ success, setSuccess ] = useState( false );
+  const [ remember, setRemember ] = useState( false );
 
   const dispatch = useDispatch();
 
@@ -31,34 +35,36 @@ function Login() {
     }
     return false;
   }
-  
+
   const handleSubmit = ( event ) => {
     event.preventDefault();
     // console.log( username )
 
-    // dispatch(logIn(username));
-    // setSuccess(true);
-    // sessionStorage.setItem("user", username);
+    // dispatch( logIn( username ) );
+    // setSuccess( true );
+    // UserUtil.setUserWithExpiry( remember, username );
 
-    
-    if (validate(username,password)) {
-        fetch('http://127.0.0.1:8000/login', {
-                //请求方法
-                method: 'POST',
-                headers: {'Content-type': 'application/json'},
-                body: JSON.stringify({username: username, password: password}),
-            }
-        ).then(response => {
-            return response.json();
-        }).then(response=>{
-            if (response.isCorrect){
-                // Log in
-                dispatch(logIn(username));
-            }
-            else{
-                alert("Your username or password is incorrect");
-            }
-        });
+
+    if ( validate( username, password ) ) {
+      fetch( 'http://127.0.0.1:8000/login', {
+        //请求方法
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify( { username: username, password: password } ),
+      }
+      ).then( response => {
+        return response.json();
+      } ).then( response => {
+        if ( response.isCorrect ) {
+          // Log in
+          dispatch( logIn( username ) );
+          setSuccess( true );
+          UserUtil.setUserWithExpiry( remember, username );
+        }
+        else {
+          alert( "Your username or password is incorrect" );
+        }
+      } );
     }
   }
 
@@ -86,6 +92,12 @@ function Login() {
                 <div className="border"></div>
               </label>
 
+              <label style={ { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" } }>
+                <p style={ { display: "inline" } }>Remember me</p>
+                <input onChange={ () => { setRemember( !remember ) } } type="checkbox" value={ remember } style={ { display: "inline" } } />
+              </label>
+
+
               <button type="submit" id="LogBtn">Log in</button>
             </section>
 
@@ -97,13 +109,13 @@ function Login() {
             </footer>
           </form>
           {
-            success 
-            ? 
+            success
+              ?
               <Redirect to="/home" />
-            : ""
+              : ""
           }
-          
-          
+
+
 
         </div>
       </div>
