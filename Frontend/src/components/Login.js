@@ -36,30 +36,30 @@ function Login() {
     event.preventDefault();
     // console.log( username )
 
-    dispatch(logIn(username));
-    setSuccess(true);
-    sessionStorage.setItem("user", username);
+    // dispatch(logIn(username));
+    // setSuccess(true);
+    // sessionStorage.setItem("user", username);
 
     
-    // if (validate(username,password)) {
-    //     fetch('http://127.0.0.1:8000/login', {
-    //             //请求方法
-    //             method: 'POST',
-    //             headers: {'Content-type': 'application/json'},
-    //             body: JSON.stringify({username: username, password: password}),
-    //         }
-    //     ).then(response => {
-    //         return response.json();
-    //     }).then(response=>{
-    //         if (response.isCorrect){
-    //             // Log in
-    //             dispatch(logIn(username));
-    //         }
-    //         else{
-    //             alert("Your username or password is incorrect");
-    //         }
-    //     });
-    // }
+    if (validate(username,password)) {
+        fetch('http://127.0.0.1:8000/login', {
+                //请求方法
+                method: 'POST',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({username: username, password: password}),
+            }
+        ).then(response => {
+            return response.json();
+        }).then(response=>{
+            if (response.isCorrect){
+                // Log in
+                dispatch(logIn(username));
+            }
+            else{
+                alert("Your username or password is incorrect");
+            }
+        });
+    }
   }
 
 
