@@ -3,6 +3,7 @@ const app = express();
 var bodyParser = require("body-parser");
 var md5 = require("md5-node");
 var nodemailer = require("nodemailer");
+var code_dictonary = {};
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -10,12 +11,13 @@ var transporter = nodemailer.createTransport({
     pass: "COMP30022",
   },
 });
-// 配置 body-parser 中间件（插件，专门用来解析表单 POST 请求体）
+// middleware which uses for receiving post request
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
-const { findUser, checkDb, addInDb, checkDupl } = require("./controller/user");
+const { findUser, checkDb, addInDb, checkDupl, changePassword } = require("./controller/user");
+const { db } = require("./db/models/User");
 
 
 
@@ -42,7 +44,7 @@ app.use(function (req, res, next) {
 
 
 
-
+// login request
 app.post("/login", async (request, response) => {
   var username = request.body.username;
   var password = md5(request.body.password);
@@ -57,6 +59,7 @@ app.post("/login", async (request, response) => {
   console.log("user is not found!");
 });
 
+// user registers their account
 app.post("/register", async function (req, res) {
   var username = req.body.username;
   var email = req.body.email;
@@ -64,7 +67,7 @@ app.post("/register", async function (req, res) {
   console.log(password);
   const back = JSON.stringify({ isCorrect: true });
 
-  //再查一下有没有重名和重复邮箱的
+  // check duplicatin username and email in the database
   const result = await checkDupl(username, email);
   // console.log(data);
   if (result) {
@@ -87,16 +90,21 @@ app.post("/register", async function (req, res) {
   addInDb(username, md5(password), email);
 });
 
+// forgot password function
 app.post("/forgot", async function (req, res) {
   var email = req.body.email;
   const back = JSON.stringify({ isCorrect: true });
   const data = await checkDb(email);
+  let text = "";
   const randomNumber = Math.floor(Math.random() * 999999999) + 10000000;
   if (data.length !== 0) {
+    for (let index = 0; index < data.length; index++) {
+      text += data[index].username;
+    }
     var mailOptions = {
       from: "itprojectexample.com",
       to: email,
-      subject: "Your verification code",
+      subject: text.concat(": Your verification code"),
       text: randomNumber.toString(),
     }
     transporter.sendMail(mailOptions, function (error, info) {
@@ -107,12 +115,35 @@ app.post("/forgot", async function (req, res) {
         res.send(back);
       }
     })
-    //rederict 
+    code_dictonary[email] = randomNumber;
   }else{
     res.send(false);
     console.log("Email address is not found!");
   }
 });
+
+// reset the password after the user's verification
+app.post("/reset", async function (req, res) {
+  var email = req.body.email;
+  var password = md5(req.body.password);
+  var code = req.body.code;
+  var verfication_code = code_dictonary[email];
+  const back = JSON.stringify({ isCorrect: true });
+  // if the verfication code is correct
+  if(code == verfication_code){
+    // change the user's old password
+    delete code_dictonary[email];
+    const result = await changePassword(email, password);
+    // if the password changed successfully
+    if (result) {
+      res.send(back);
+    }else {
+      res.send(false);
+    }
+  } else {
+    res.send(false);
+  }
+})
 
 app.listen(8000, () => {
   console.log("The server is ON, port 8000 is listening");
