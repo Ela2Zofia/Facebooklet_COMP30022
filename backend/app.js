@@ -26,7 +26,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const { findUser, checkDb, addInDb, checkDupl } = require("./controller/user");
 
-
 //使用redis存储数据-su
 const redisClient = require("./db/redis");
 const sessionStore = new RedisStore({
@@ -70,19 +69,48 @@ app.use(function (req, res, next) {
 app.post("/login", async (request, response) => {
   var username = request.body.username;
   var password = md5(request.body.password);
-  const back = JSON.stringify({ isCorrect: true });
+  // const back = JSON.stringify({ isCorrect: true });
   //   response.send(back);
   const data = await findUser(username, password);
   if (data) {
-    console.log("user found!");
-    //设置session
+    console.log("user found!: ", data.username);
+    //set session
     request.session.username = data.username;
     console.log(request.session.username);
-    return response.send(back);
+    response.json({ isCorrect: true });
+    return;
   }
-  response.send(false);
+  response.json(false);
   console.log("user is not found!");
 });
+
+
+// app.get("/login-test", (req, res, next) => {
+//   console.log(req.session.username);
+//   if (req.session.username) {
+//     res.json({
+//       errno: 0,
+//       msg: '已登陆'
+//     })
+//     return;
+//   }
+//   res.json({
+//     errno: -1,
+//     msg: '未登陆'
+//   });
+// });
+
+// //测试session是否可用
+// app.get("/session-test", (req, res, next) => {
+//   const session = req.session;
+//   if (session.viewNum == null) {
+//     session.viewNum = 0;
+//   }
+//   session.viewNum++;
+//   res.json({
+//     viewNum: session.viewNum,
+//   });
+// });
 
 app.post("/register", async function (req, res) {
   var username = req.body.username;
@@ -141,9 +169,11 @@ app.post("/forgot", async function (req, res) {
   }
 });
 
-
-//注册路由-su
+//register route
 app.use("/", contactRouter);
+// app.get("/contacts", (req, res, next) => {
+//   console.log("a");
+// });
 
 app.listen(8000, () => {
   console.log("The server is ON, port 8000 is listening");
