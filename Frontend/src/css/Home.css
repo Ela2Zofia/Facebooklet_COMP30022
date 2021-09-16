@@ -1,0 +1,92 @@
+.HomeUpper{
+    border-bottom: 2px solid gainsboro;
+    width: 100%;
+    min-height: 400px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+.Greeting{
+    width: 40%;
+    height: 100%;
+    background-color: white;
+    box-shadow: 0 5px 10px rgb(197, 197, 197);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 2;
+}
+
+.MainText{
+    margin-top: 20px;
+    width: 80%;
+    font-size: 50px;
+    font-weight: bolder;
+    text-align: left;
+
+}
+
+.GreetingText{
+    width: 80%;
+    font-size: xx-large;
+    text-align: left;
+}
+
+.Weather{
+    width: 40%;
+}
+
+.HomeLower{
+    /* border: 1px solid black; */
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.CountContainer{
+    width: 87%;
+    height: 80%;
+    background-color: white;
+    box-shadow: 0 5px 10px rgb(197, 197, 197);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.Count{
+    /* border: 1px solid black; */
+    width: 40%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Count label{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.Count .Num{
+    margin-top: 10%;
+    font-size: xx-large;
+    font-weight: bold;
+    color: rgb(45, 196, 45);
+}
+
+.Bar{
+    border: 1px solid rgba(158, 153, 153, 0.486);
+    height: 80%;
+}
