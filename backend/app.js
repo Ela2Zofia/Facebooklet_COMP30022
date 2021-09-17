@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 
 //import redis-su
-const session = require("express-session");
-const RedisStore = require("connect-redis")(session);
+// const session = require("express-session");
+// const RedisStore = require("connect-redis")(session);
 // const { SuccessModel, ErrorModel } = require("./model/resModel");
 
 //import router-su
@@ -29,22 +29,22 @@ const { findUser, checkDb, addInDb, checkDupl, changePassword } = require("./con
 const { db } = require("./db/models/User");
 
 //use redis store data-su
-const redisClient = require("./db/redis");
-const sessionStore = new RedisStore({
-  client: redisClient,
-});
-app.use(
-  session({
-    secret: "WJiol#23123_",
-    cookie: {
-      // path: '/', 
-      // httpOnly: true, 
-      //cookie will be invalid after 24 hours
-      maxAge: 24 * 60 * 60 * 1000,
-    },
-    store: sessionStore,
-  })
-);
+// const redisClient = require("./db/redis");
+// const sessionStore = new RedisStore({
+//   client: redisClient,
+// });
+// app.use(
+//   session({
+//     secret: "WJiol#23123_",
+//     cookie: {
+//       // path: '/', 
+//       // httpOnly: true, 
+//       //cookie will be invalid after 24 hours
+//       maxAge: 24 * 60 * 60 * 1000,
+//     },
+//     store: sessionStore,
+//   })
+// );
 
 // michael's code
 app.use(function (req, res, next) {
@@ -80,8 +80,8 @@ app.post("/login", async (request, response) => {
   if (data) {
     console.log("user found!: ", data.username);
     //set session
-    request.session.username = data.username;
-    console.log(request.session.username);
+    // request.session.username = data.username;
+    // console.log(request.session.username);
     response.json({ isCorrect: true });
     return;
   }
