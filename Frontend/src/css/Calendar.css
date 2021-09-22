@@ -1,0 +1,8 @@
+.Calendar{
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.Paper{
+    width: 100%;
+}
