@@ -2,7 +2,7 @@ function setMeetings(meetings) {
   
   return (
     {
-      type: "SET_MEETINGS",
+      type: "SET_MEETING",
       payload: meetings
     }
   )

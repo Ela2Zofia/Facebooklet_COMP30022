@@ -26,7 +26,6 @@ class ForgetPassword extends React.Component {
     let { email } = this.state;
     if ( this.validate( email ) ) {
       fetch( 'http://127.0.0.1:8000/forgot', {
-        //请求方法
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify( { email: email } ),

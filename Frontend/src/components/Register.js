@@ -50,7 +50,6 @@ class Register extends React.Component {
     console.log( typeof ( password1 ) );
     if ( this.validate( username, email, password1, password2 ) ) {
       fetch( 'http://127.0.0.1:8000/register', {
-        //请求方法
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify( { username: username, email: email, password: password1 } ),
@@ -71,6 +70,7 @@ class Register extends React.Component {
   }
 
   render() {
+      //TODO: check the pattern in password
 
     if ( this.state.isSuccess ) {
       return <Redirect to="/login" />

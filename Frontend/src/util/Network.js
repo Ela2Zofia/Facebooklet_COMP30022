@@ -99,6 +99,81 @@ class Network{
   }
 
 
+    static async fetchMeetingsNet(user){
+        const HOST = this.HOST_MEETINGS+"?_sort=firstName";
+        const res = await fetch(HOST, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+
+                // TODO: user header
+                "User": user
+            }
+        });
+
+        if(!res.ok){
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json();
+        // console.log(data);
+        return data;
+    }
+
+    static async addMeetingsNet(user, meeting) {
+        const res = await fetch(this.HOST_MEETINGS, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                // TODO: user header
+                "User": user
+            },
+            body: JSON.stringify(meeting)
+        });
+
+        if(!res.ok){
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json()
+        return data;
+    };
+
+
+    static async delMeetingNet(user, id){
+        console.log("Deleted is",id)
+        const HOST = this.HOST_MEETINGS + "/" +id;
+        const res = await fetch(HOST, {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json",
+                // TODO: user header
+                "User": user
+            }
+        });
+
+        if(!res.ok){
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+    };
+
+    static async editMeetingNet(user, meeting){
+        const HOST = this.HOST_MEETINGS + "/" +meeting.id;
+        const res = await fetch(HOST, {
+            method: "PUT",
+            headers:{
+                "Content-type": "application/json",
+                // TODO: user header
+                "User": user
+            },
+            body: JSON.stringify(meeting)
+        })
+
+        if(!res.ok){
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+    };
+
 }
 
 export default Network;

@@ -1,13 +1,57 @@
 import React from 'react'
-import Topbar from '../page-components/Topbar';
+import Meeting from '../page-components/Meeting'
+import {connect} from "react-redux";
+import addMeeting from "../actions/addMeeting";
+import deleteMeeting from "../actions/deleteMeeting";
+import setMeetings from "../actions/setMeetings";
+import Network from '../util/Network'
+import MeetingTopbar from "../page-components/MeetingTopBar";
+import "../css/Meetings.css"
+class Meetings extends React.Component{
 
-function Meetings() {
-  return (
-    <div className="Container">
-      <Topbar />
-      <h1>This is meetings page</h1>
-    </div>
-  )
+    async componentDidMount() {
+        const serverData = await Network.fetchMeetingsNet(this.props.user)
+        this.props.setMeetings(serverData)
+    }
+
+
+
+
+
+    render(){
+        // return(
+        //     <div className="Container">
+        //         <Topbar />
+        //         <h1>This is meetings page</h1>
+        //     </div>
+        // )
+
+
+
+        return (
+            <div className="Container">
+                <MeetingTopbar/>
+                <div className="InnerContainer">
+                    {this.props.meetings.length === 0 ?
+                        <h3>No Meeting</h3>
+                        : this.props.meetings.map(
+                            (meeting) =>{
+                                return(
+                                    <Meeting
+                                        isSelected = {this.props.selected.includes(meeting.id)}
+                                        meeting = {meeting}
+
+                                    />)
+                            }
+                        )}
+                </div>
+            </div>
+        )
+    }
 }
 
-export default Meetings;
+export default connect(
+    state => ({meetings: state.meetings, user: state.user, selected: state.selected}),
+    {setMeetings}
+)(Meetings)
+
