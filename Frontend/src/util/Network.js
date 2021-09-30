@@ -116,7 +116,6 @@ class Network{
         }
 
         const data = await res.json();
-        // console.log(data);
         return data;
     }
 
@@ -141,7 +140,6 @@ class Network{
 
 
     static async delMeetingNet(user, id){
-        console.log("Deleted is",id)
         const HOST = this.HOST_MEETINGS + "/" +id;
         const res = await fetch(HOST, {
             method: "DELETE",

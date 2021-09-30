@@ -153,16 +153,27 @@
   ],
   "meetings": [
     {
-      "topic": "UTest2",
-      "meetingNumber": "12345",
-      "link": "123",
-      "date": "2021-09-01",
-      "time": "00:48",
-      "duration": 675,
-      "participants": [],
-      "description": "",
-      "_id": 110,
-      "id": 2
+      "topic": "Untitled",
+      "meetingNumber": "111222",
+      "link": "http://meeting.com",
+      "date": "2021-10-13",
+      "time": "04:33",
+      "duration": 750,
+      "participants": [
+        {
+          "_id": 12,
+          "firstName": "Jiawei",
+          "lastName": "Li",
+          "occupation": "Student",
+          "email": "derrickli824@gmail.com",
+          "phone": "+61450205002",
+          "tag": [],
+          "description": "best programmer --- in the world",
+          "id": 12
+        }
+      ],
+      "description": "This is a test",
+      "id": 1
     }
   ]
 }
