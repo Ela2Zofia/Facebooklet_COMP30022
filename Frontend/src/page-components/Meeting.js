@@ -15,9 +15,9 @@ class Meeting extends React.Component {
     changeSelected = () => {
 
         if (!this.props.isSelected){
-            this.props.addSelected(this.props.meeting.id);
+            this.props.addSelected(this.props.meeting._id);
         }else{
-            this.props.removeSelected(this.props.meeting.id);
+            this.props.removeSelected(this.props.meeting._id);
         }
     }
 

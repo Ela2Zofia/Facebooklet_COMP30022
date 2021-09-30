@@ -11,8 +11,9 @@ import setContacts from "../actions/setContacts";
 import editMeeting from "../actions/editMeeting";
 
 
-//TODO: 更新MeetingForm后 MeetingInfo没有更新
+
 class MeetingForm extends React.Component{
+    //TODO: 更新MeetingForm后 MeetingInfo没有更新
     state = {
         topic:'Untitled',
         meetingNumber: '',
@@ -76,7 +77,7 @@ class MeetingForm extends React.Component{
     }
 
     validate = (state)=>{
-        //TODO: re expression
+        //TODO: re expression to check link
 
         if (state.meetingNumber === ''){
             alert("Please enter a meeting number");
@@ -105,7 +106,7 @@ class MeetingForm extends React.Component{
             if (this.props.meeting) {
                 const stateCopy = JSON.parse(JSON.stringify(this.state))
                 //TODO: change to _id
-                stateCopy.id = this.props.meeting.id
+                stateCopy._id = this.props.meeting._id
                 await Network.editMeetingNet(this.props.user,stateCopy);
                 this.props.editMeeting(stateCopy);
                 this.props.onClose();

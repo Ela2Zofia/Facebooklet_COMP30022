@@ -3,7 +3,7 @@ function meetingReducer(state = [], action) {
         case "ADD_MEETING":
             return [...state, action.payload]
         case "DELETE_MEETING":
-            return state.filter(meeting => meeting.id !== action.payload)
+            return state.filter(meeting => meeting._id !== action.payload)
         case "SET_MEETING":
             return action.payload
         case "EDIT_MEETING":

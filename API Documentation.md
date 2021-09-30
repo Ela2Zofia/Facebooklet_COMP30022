@@ -208,7 +208,7 @@ static async fetchMeetingsNet(user){
     };
 
     static async editMeetingNet(user, meeting){
-        const HOST = this.HOST_MEETINGS + "/" +meeting.id;
+        const HOST = this.HOST_MEETINGS + "/" +meeting._id;
         const res = await fetch(HOST, {
             method: "PUT",
             headers:{

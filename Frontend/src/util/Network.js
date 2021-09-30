@@ -10,7 +10,6 @@ class Network{
       method: "POST",
       headers: {
         "Content-type": "application/json",
-        // TODO: user header
         "User": user
       },
       body: JSON.stringify(contact)
@@ -31,7 +30,6 @@ class Network{
       headers: {
         "Content-type": "application/json",
   
-        // TODO: user header
         "User": user
       }
     });
@@ -51,7 +49,6 @@ class Network{
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
-        // TODO: user header
         "User": user
       }
     });
@@ -67,7 +64,6 @@ class Network{
       method: "PUT",
       headers:{
         "Content-type": "application/json",
-        // TODO: user header
         "User": user
       },
       body: JSON.stringify(contact)
@@ -84,7 +80,6 @@ class Network{
       method: "GET",
       headers:{
         "Content-type": "application/json",
-        // TODO: user header
         "User": user
       },
     })
@@ -106,7 +101,6 @@ class Network{
             headers: {
                 "Content-type": "application/json",
 
-                // TODO: user header
                 "User": user
             }
         });
@@ -124,7 +118,6 @@ class Network{
             method: "POST",
             headers: {
                 "Content-type": "application/json",
-                // TODO: user header
                 "User": user
             },
             body: JSON.stringify(meeting)
@@ -145,7 +138,6 @@ class Network{
             method: "DELETE",
             headers: {
                 "Content-type": "application/json",
-                // TODO: user header
                 "User": user
             }
         });
@@ -156,12 +148,11 @@ class Network{
     };
 
     static async editMeetingNet(user, meeting){
-        const HOST = this.HOST_MEETINGS + "/" +meeting.id;
+        const HOST = this.HOST_MEETINGS + "/" +meeting._id;
         const res = await fetch(HOST, {
             method: "PUT",
             headers:{
                 "Content-type": "application/json",
-                // TODO: user header
                 "User": user
             },
             body: JSON.stringify(meeting)

@@ -39,7 +39,7 @@ class Meetings extends React.Component{
                             (meeting) =>{
                                 return(
                                     <Meeting
-                                        isSelected = {this.props.selected.includes(meeting.id)}
+                                        isSelected = {this.props.selected.includes(meeting._id)}
                                         meeting = {meeting}
 
                                     />)
