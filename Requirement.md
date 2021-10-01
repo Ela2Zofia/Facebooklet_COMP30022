@@ -22,21 +22,21 @@
     - Meeting information
       - Meeting name
       - Meeting summary
-      - Meeting attendees (signed user)
+      - Meeting attendees <s>(signed user)</s>
       - Meeting link
       - Start time & end time
       - **Custom content**
     - Display future/ongoing/finished meetings
-    - Notification function
+    - Notification function <s>(in-app)</s> (e-mail)
     - Individual info page for meetings
 ***
 - **Optional**
   - Authentication method
     - anti-bot
   - Contacts
-    - Embeded e-mail function
-    - Check their last online time
-    - Check their last contact time
-    - Show number of current concurrent online contacts
+    - <s>Embeded e-mail function</s>
+    - <s>Check their last online time</s>
+    - <s>Check their last contact time</s>
+    - <s>Show number of current concurrent online contacts</s>
   - Meetings
     - List of meetings, best to be implemented in a timetable or calendar form
