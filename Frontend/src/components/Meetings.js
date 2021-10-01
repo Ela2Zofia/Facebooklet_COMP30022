@@ -1,23 +1,20 @@
 import React from 'react'
 import Meeting from '../page-components/Meeting'
 import {connect} from "react-redux";
-import addMeeting from "../actions/addMeeting";
-import deleteMeeting from "../actions/deleteMeeting";
+import clearSelected from '../actions/clearSelected';
 import setMeetings from "../actions/setMeetings";
+import endEdit from '../actions/endEdit';
 import Network from '../util/Network'
 import MeetingTopbar from "../page-components/MeetingTopBar";
 import "../css/Meetings.css"
 class Meetings extends React.Component{
     //TODO: time stamp
+    
 
     async componentDidMount() {
         const serverData = await Network.fetchMeetingsNet(this.props.user)
         this.props.setMeetings(serverData)
     }
-
-
-
-
 
     render(){
         // return(

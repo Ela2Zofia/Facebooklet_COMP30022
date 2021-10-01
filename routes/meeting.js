@@ -28,13 +28,13 @@ router.post("/", async (req, res, next) => {
 
 // update meeting information
 router.put("/:id", async (req, res, next) => {
-    await updateMeeting(req.body._id, req.body);
+    await updateMeeting(req.params.id, req.body);
     res.status(200).send();
   });
   
 // delete chosen meeting
 router.delete("/:id", async (req, res, next) => {
-    const id = req.url.split("/")[2];
+    const id = req.params.id;
     await delMeeting(id);
     res.status(200).send();
 });

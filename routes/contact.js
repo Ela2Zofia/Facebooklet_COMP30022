@@ -41,13 +41,15 @@ router.post("/", async (req, res, next) => {
 // update contact information
 router.put("/:id", async (req, res, next) => {
   console.log(req.body._id);
-  await updateContact(req.body._id, req.body);
+  await updateContact(req.params.id, req.body);
   res.status(200).send();
 });
 
 //delete chosen contact
 router.delete("/:id", async (req, res, next) => {
-  const id = req.url.split("/")[2];
+  
+  const id = req.params.id;
+  // console.log(id);
   await delContact(id);
   res.status(200).send();
 });
