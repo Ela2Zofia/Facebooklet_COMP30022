@@ -53,7 +53,7 @@ class Meeting extends React.Component {
                     </div>
                 </div>
 
-                <a className="link" href={meeting.link}>{meeting.link}</a>
+                <a className="link" target="_blank" href={meeting.link}>Meeting Link</a>
 
                 { this.checkEdit()}
                 <MeetingInfo open={ this.state.isOpen } meeting = { this.props.meeting } onClose={ () => this.setState( {isOpen:false} ) } />

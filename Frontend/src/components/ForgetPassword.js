@@ -25,7 +25,7 @@ class ForgetPassword extends React.Component {
     event.preventDefault();
     let { email } = this.state;
     if ( this.validate( email ) ) {
-      fetch( "http://localhost:" + `${process.env.PORT || 8000}` + "/api/forgot", {
+      fetch( "/api/forgot", {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify( { email: email } ),

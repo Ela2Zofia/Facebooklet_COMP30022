@@ -45,7 +45,7 @@ function Login() {
 
 
     if ( validate( username, password ) ) {
-      fetch( "http://localhost:" +`${process.env.PORT || 8000}`+ "/api/login", {
+      fetch("/api/login", {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify( { username: username, password: password } ),

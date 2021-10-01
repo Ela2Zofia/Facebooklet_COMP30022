@@ -6,7 +6,8 @@ import {connect} from "react-redux";
 import addMeeting from "../actions/addMeeting";
 import Network from "../util/Network";
 import { Select } from 'antd';
-import "antd/dist/antd.css"
+// import "antd/dist/antd.css";
+import "../css/AntStyle.css";
 import setContacts from "../actions/setContacts";
 import editMeeting from "../actions/editMeeting";
 
