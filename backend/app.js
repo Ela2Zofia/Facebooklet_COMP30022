@@ -2,12 +2,13 @@ const express = require("express");
 const app = express();
 
 //import redis-su
-const session = require("express-session");
-const RedisStore = require("connect-redis")(session);
+// const session = require("express-session");
+// const RedisStore = require("connect-redis")(session);
 // const { SuccessModel, ErrorModel } = require("./model/resModel");
 
 //import router-su
 const contactRouter = require("./routes/contact");
+const meetingRouter = require("./routes/meeting");
 
 var bodyParser = require("body-parser");
 var md5 = require("md5-node");
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 const { findUser, checkDb, addInDb, checkDupl, changePassword } = require("./controller/user");
 const { db } = require("./db/models/User");
 
+/*
 //use redis store data-su
 const redisClient = require("./db/redis");
 const sessionStore = new RedisStore({
@@ -44,9 +46,9 @@ app.use(
     },
     store: sessionStore,
   })
-);
+);*/
 
-// michael's code
+// middleware of connecting frontend and backend
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -78,10 +80,11 @@ app.post("/login", async (request, response) => {
   //   response.send(back);
   const data = await findUser(username, password);
   if (data) {
+    /*
     console.log("user found!: ", data.username);
     //set session
     request.session.username = data.username;
-    console.log(request.session.username);
+    console.log(request.session.username);*/
     response.json({ isCorrect: true });
     return;
   }
@@ -174,11 +177,15 @@ app.post("/reset", async function (req, res) {
     res.send(false);
   }
 })
+
 //register route
 app.use("/", contactRouter);
 // app.get("/contacts", (req, res, next) => {
 //   console.log("a");
 // });
+
+// meeting page
+app.use("/", meetingRouter);
 
 app.listen(8000, () => {
   console.log("The server is ON, port 8000 is listening");

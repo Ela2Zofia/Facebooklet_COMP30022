@@ -2,8 +2,9 @@ class Network{
   // const HOST = "http://localhost:8000/contacts";
   // const HOST = "http://localhost:5000/contacts";
 
-  static HOST_CONTACTS = "http://localhost:8000/contacts"
-  static HOST_MEETINGS = "http://localhost:8000/meetings"
+  static HOST_CONTACTS = "http://localhost:8000/contacts";
+  static HOST_MEETINGS = "http://localhost:8000/meetings";
+  static HOST_REGISTER = "http://localhost:8000/register";
 
   static async addContactNet(user, contact) {
     const res = await fetch(this.HOST_CONTACTS, {
@@ -91,6 +92,15 @@ class Network{
     const data = await res.json();
     // console.log(data);
     return data;
+  };
+
+  static registerUserNet(userInfo){
+    return fetch( this.HOST_REGISTER, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(userInfo),
+      }
+    );
   }
 
 

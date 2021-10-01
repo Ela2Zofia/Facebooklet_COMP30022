@@ -83,24 +83,23 @@ const delContact = async (id) => {
   const contact = await Contact.findOneAndDelete({
     _id: id,
   });
-  console.log(contact);
 };
 
-const searchContact = async (id) => {
-  const contact = await Contact.findOne({
-    _id: id,
-  });
-  console.log(contact);
-  if (contact == null) {
-    return false;
-  }
-  return true;
-};
+// const searchContact = async (id) => {
+//   const contact = await Contact.findOne({
+//     _id: id,
+//   });
+//   console.log(contact);
+//   if (contact == null) {
+//     return false;
+//   }
+//   return true;
+// };
 
 module.exports = {
   getList,
   newContact,
   updateContact,
   delContact,
-  searchContact,
+  // searchContact,
 };
