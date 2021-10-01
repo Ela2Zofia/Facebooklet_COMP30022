@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 
 //import redis-su
-const session = require("express-session");
-const RedisStore = require("connect-redis")(session);
+// const session = require("express-session");
+// const RedisStore = require("connect-redis")(session);
 // const { SuccessModel, ErrorModel } = require("./model/resModel");
 
 //import router-su
