@@ -57,7 +57,7 @@ class Reset extends React.Component {
         event.preventDefault();
         let {email, code, password1, password2 } = this.state;
         if ( this.validate( code, password1, password2 ) ) {
-            fetch( 'http://127.0.0.1:8000/reset', {
+            fetch( "http://localhost:" + `${process.env.PORT || 8000}` + "/api/reset", {
                     method: 'POST',
                     headers: { 'Content-type': 'application/json' },
                     body: JSON.stringify( {  email: email, code: code, password: password1 } ),

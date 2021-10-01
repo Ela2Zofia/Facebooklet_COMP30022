@@ -45,7 +45,7 @@ function Login() {
 
 
     if ( validate( username, password ) ) {
-      fetch( 'http://127.0.0.1:8000/login', {
+      fetch( "http://localhost:" +`${process.env.PORT || 8000}`+ "/api/login", {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify( { username: username, password: password } ),
@@ -53,7 +53,7 @@ function Login() {
       ).then( response => {
         return response.json();
       } ).then( response => {
-          if ( true ) {
+          if ( response.isCorrect) {
               // Log in
               dispatch( logIn( username ) );
               setSuccess( true );

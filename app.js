@@ -51,7 +51,8 @@ app.use(function (req, res, next) {
 
 
 // login request
-app.post("/login", async (request, response) => {
+app.post("/api/login", async (request, response) => {
+  console.log("Recieved login");
   var username = request.body.username;
   var password = md5(request.body.password);
   // const back = JSON.stringify({ isCorrect: true });
@@ -71,7 +72,7 @@ app.post("/login", async (request, response) => {
 });
 
 // user registers their account
-app.post("/register", async function (req, res) {
+app.post("/api/register", async function (req, res) {
   var username = req.body.username;
   var email = req.body.email;
   var password = req.body.password;
@@ -102,7 +103,7 @@ app.post("/register", async function (req, res) {
 });
 
 // forgot password function
-app.post("/forgot", async function (req, res) {
+app.post("/api/forgot", async function (req, res) {
   var email = req.body.email;
   const back = JSON.stringify({ isCorrect: true });
   const data = await checkDb(email);
@@ -134,7 +135,7 @@ app.post("/forgot", async function (req, res) {
 });
 
 // reset the password after the user's verification
-app.post("/reset", async function (req, res) {
+app.post("/api/reset", async function (req, res) {
   var email = req.body.email;
   var password = md5(req.body.password);
   var code = req.body.code;
@@ -169,6 +170,6 @@ app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '/Frontend/build', 'index.html'));
 });
 
-app.listen(8000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log("The server is ON, port 8000 is listening");
 });

@@ -1,12 +1,17 @@
 const mongoose = require("mongoose");
 
-const url = "mongodb+srv://ela2zofia:derrick%400824@5silvers.3bu4k.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const dbName = "5Silvers";
+const url = "mongodb+srv://ela2zofia:derrick%400824@cluster0.3bu4k.mongodb.net/Cluster0?retryWrites=true&w=majority";
+// const dbName = "5Silvers";
 
-mongoose.connect(`${url}/${dbName}`, {
+// mongoose.connect(`${url}/${dbName}`, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 
 const db = mongoose.connection;
 
