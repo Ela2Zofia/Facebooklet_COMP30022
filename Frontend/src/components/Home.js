@@ -8,9 +8,9 @@ import ReactWeather, { useOpenWeather } from "react-open-weather";
 function Home() {
 
   const greetings = [
-    "How is your day?", 
-    "How are you doing today?", 
-    "What's poppin'!", 
+    "How is your day?",
+    "How are you doing today?",
+    "What's poppin'!",
     "May the Force be with you!",
     "Elementary, my dear Watson!",
     "It does not do to dwell on dreams and forget to live.",
@@ -20,10 +20,11 @@ function Home() {
   ];
   const user = useSelector( state => state.user );
   const [ contactNum, setContactNum ] = useState( 0 );
+  const [ meetingNum, setMeetingNum ] = useState( 0 );
   var lat = "";
   var lon = "";
   var city = "";
-  
+
 
 
   // get geolocation of the user for weather module
@@ -51,9 +52,14 @@ function Home() {
     unit: 'metric',
   } );
 
-
   useEffect( () => {
 
+    async function getMeetings() {
+      const serverData = await Network.fetchMeetingsNet( user );
+      setMeetingNum( serverData.length )
+    }
+
+    getMeetings();
 
     async function getContacts() {
       const serverData = await Network.fetchContactsNet( user );
@@ -74,13 +80,13 @@ function Home() {
       <div className="HomeUpper">
         <div className="Greeting">
           <div className="MainText">
-            Hello { user.charAt(0).toUpperCase() + user.slice(1) }
+            Hello { user.charAt( 0 ).toUpperCase() + user.slice( 1 ) }
           </div>
-          <br/>
+          <br />
           <div className="GreetingText">
-            {greetings[Math.floor(Math.random() * greetings.length)]}
+            { greetings[ Math.floor( Math.random() * greetings.length ) ] }
           </div>
-          
+
         </div>
         <div className="Weather">
           <ReactWeather
@@ -114,7 +120,7 @@ function Home() {
             </div>
 
           </div>
-          
+
           <div className="Bar"></div>
 
           <div className="Count">
@@ -124,7 +130,7 @@ function Home() {
               <RiVidiconLine size={ 40 } />
             </label>
             <div className="Num">
-              20
+              { meetingNum }
             </div>
           </div>
         </div>

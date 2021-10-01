@@ -13,7 +13,6 @@ import editMeeting from "../actions/editMeeting";
 
 
 class MeetingForm extends React.Component{
-    //TODO: 更新MeetingForm后 MeetingInfo没有更新
     state = {
         topic:'Untitled',
         meetingNumber: '',

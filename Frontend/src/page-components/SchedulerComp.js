@@ -11,6 +11,9 @@ import {
   CurrentTimeIndicator
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { useSelector,useDispatch } from 'react-redux';
+import Network from "../util/Network";
+import setMeetings from '../actions/setMeetings';
+import { useEffect } from 'react';
 
 function SchedulerComp() {
 
@@ -19,12 +22,19 @@ function SchedulerComp() {
   const meetings = useSelector(state => state.meetings);
 
 
+  useEffect(()=>{
+    async function getMeetings(){
+      const data = await Network.fetchMeetingsNet(user);
+      dispatch(setMeetings(data));
+    }
+
+    getMeetings();
+
+  },[])
 
   const currentDate = new Date().toISOString().slice( 0, 10 );
-  // const schedulerData = [
-  //   { startDate: '2018-11-01T09:45', endDate: '2018-11-01T11:00', title: 'Meeting' },
-  //   { startDate: '2018-11-01T12:00', endDate: '2018-11-01T13:30', title: 'Go to a gym' },
-  // ];
+ 
+
   const schedulerData = meetings.map((meeting) => {
     
     const startDate = new Date(meeting.date + "T" + meeting.time);
