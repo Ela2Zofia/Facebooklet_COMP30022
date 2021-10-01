@@ -96,7 +96,7 @@ function ContactInfo( { open, contact, onClose } ) {
             <div>Phone Number: { contact.phone }</div>
             <div>Description: { contact.description }</div>
 
-            <div className="Tags">Tags: &nbsp;
+            <div className="Tags">
               { contact.tag.map( ( tag, key ) => {
                 return (  
                   <div key={ key } className="Tag">{ tag }</div>
