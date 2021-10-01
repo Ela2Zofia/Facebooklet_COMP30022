@@ -33,7 +33,6 @@ router.get("/contacts", async (req, res, next) => {
 router.post("/contacts", async (req, res, next) => {
   const belongsWho = req.headers.user;
   const data = await newContact(belongsWho, req.body);
-  console.log(data);
   res.json(data);
   return;
 });

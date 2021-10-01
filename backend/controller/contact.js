@@ -83,7 +83,6 @@ const delContact = async (id) => {
   const contact = await Contact.findOneAndDelete({
     _id: id,
   });
-  console.log(contact);
 };
 
 const searchContact = async (id) => {
