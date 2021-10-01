@@ -1,16 +1,36 @@
-class Network{
-  // const HOST = "http://localhost:8000/contacts";
-  // const HOST = "http://localhost:5000/contacts";
+# API documentation for frontend
 
-  static HOST_CONTACTS = "http://localhost:8000/contacts";
-  static HOST_MEETINGS = "http://localhost:8000/meetings";
-  static HOST_REGISTER = "http://localhost:8000/register";
 
-  static async addContactNet(user, contact) {
+## 2. Contacts
+### 1. Port
+```javascript
+HOST_CONTACTS = "/contacts"
+```
+
+### 2.Sample Data Structure
+```json
+{
+      "id": 1,
+      "firstName": "Derrick",
+      "lastName": "Li",
+      "occupation": "Google CEO",
+      "email": "derrickli824@gmail.com",
+      "phone": "+61450205002",
+      "tag": [
+        "people",
+        "crazy_smart"
+      ],
+      "description": "Some"
+}
+```
+### 3. APIs
+```javascript
+static async addContactNet(user, contact) {
     const res = await fetch(this.HOST_CONTACTS, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        // TODO: user header
         "User": user
       },
       body: JSON.stringify(contact)
@@ -31,6 +51,7 @@ class Network{
       headers: {
         "Content-type": "application/json",
   
+        // TODO: user header
         "User": user
       }
     });
@@ -40,7 +61,6 @@ class Network{
     }
 
     const data = await res.json();
-    // console.log(data);
     return data;
   }
 
@@ -50,6 +70,7 @@ class Network{
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
+        // TODO: user header
         "User": user
       }
     });
@@ -65,6 +86,7 @@ class Network{
       method: "PUT",
       headers:{
         "Content-type": "application/json",
+        // TODO: user header
         "User": user
       },
       body: JSON.stringify(contact)
@@ -81,6 +103,7 @@ class Network{
       method: "GET",
       headers:{
         "Content-type": "application/json",
+        // TODO: user header
         "User": user
       },
     })
@@ -90,27 +113,52 @@ class Network{
     }
 
     const data = await res.json();
-    // console.log(data);
     return data;
-  };
-
-  static registerUserNet(userInfo){
-    return fetch( this.HOST_REGISTER, {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(userInfo),
-      }
-    );
   }
+```
 
+## 3. Meetings
+### 1. Port
+```javascript
+HOST_MEETINGS = "/meetings"
+```
 
-    static async fetchMeetingsNet(user){
+### 2.Sample Data Structure
+```json
+{
+        "topic": "Untitled",
+        "meetingNumber": "111222",
+        "link": "http://meeting.com",
+        "date": "2021-10-13",
+        "time": "04:33",
+        "duration": 750,
+        "participants": [
+        {
+            "_id": 12,
+            "firstName": "Jiawei",
+            "lastName": "Li",
+            "occupation": "Student",
+            "email": "derrickli824@gmail.com",
+            "phone": "+61450205002",
+            "tag": [],
+            "description": "best programmer --- in the world",
+            "id": 12
+        }
+    ],
+        "description": "This is a test",
+        "id": 1
+}
+```
+### 3. APIs
+```javascript
+static async fetchMeetingsNet(user){
         const HOST = this.HOST_MEETINGS+"?_sort=firstName";
         const res = await fetch(HOST, {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
 
+                // TODO: user header
                 "User": user
             }
         });
@@ -128,6 +176,7 @@ class Network{
             method: "POST",
             headers: {
                 "Content-type": "application/json",
+                // TODO: user header
                 "User": user
             },
             body: JSON.stringify(meeting)
@@ -148,6 +197,7 @@ class Network{
             method: "DELETE",
             headers: {
                 "Content-type": "application/json",
+                // TODO: user header
                 "User": user
             }
         });
@@ -163,6 +213,7 @@ class Network{
             method: "PUT",
             headers:{
                 "Content-type": "application/json",
+                // TODO: user header
                 "User": user
             },
             body: JSON.stringify(meeting)
@@ -174,5 +225,7 @@ class Network{
     };
 
 }
+```
 
-export default Network;
+
+

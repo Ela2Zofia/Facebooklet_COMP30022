@@ -68,6 +68,7 @@ class Register extends React.Component {
   }
 
   render() {
+      //TODO: check the pattern in password
 
     if ( this.state.isSuccess ) {
       return <Redirect to="/login" />
