@@ -26,7 +26,12 @@ router.get("/", async (req, res, next) => {
 
   //get the contact list
   const listData = await getList(belongsWho, keyword);
-  res.json(listData);
+  if(belongsWho === ""){
+    res.json();
+  }else{
+    res.json(listData);
+  }
+  
   return;
 });
 
