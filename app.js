@@ -11,9 +11,9 @@ var md5 = require("md5-node");
 var nodemailer = require("nodemailer");
 var code_dictonary = {};
 var transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: "Outlook",
   auth: {
-    user: "itprojectexample@gmail.com",
+    user: "itprojectexample@outlook.com",
     pass: "COMP30022",
   },
 });

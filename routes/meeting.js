@@ -10,9 +10,9 @@ const {
   } = require("../controller/meeting")
 
 var transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: "Outlook",
   auth: {
-    user: "itprojectexample@gmail.com",
+    user: "itprojectexample@outlook.com",
     pass: "COMP30022",
   },
 });
