@@ -84,6 +84,8 @@ app.post("/api/register", async function (req, res) {
   // console.log(data);
   if (result) {
     return res.send(false);
+  }else{
+    res.send(back);
   }
   var mailOptions = {
     from: "itprojectexample.com",
@@ -93,10 +95,10 @@ app.post("/api/register", async function (req, res) {
   };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      res.send(error);
+      // res.send(error);
     } else {
       console.log("Email sent!");
-      res.send(back);
+      // res.send(back);
     }
   });
   addInDb(username, md5(password), email);
