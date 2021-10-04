@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
+import Network from "../util/Network";
 class Register extends React.Component {
   state = {
     username: '',
@@ -49,12 +50,8 @@ class Register extends React.Component {
     let { username, email, password1, password2 } = this.state;
     console.log( typeof ( password1 ) );
     if ( this.validate( username, email, password1, password2 ) ) {
-      fetch( 'http://127.0.0.1:8000/register', {
-        //请求方法
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify( { username: username, email: email, password: password1 } ),
-      }
+      Network.registerUserNet(
+        { username: username, email: email, password: password1 }
       ).then( response => {
         return response.json();
       } ).then( response => {
@@ -71,6 +68,7 @@ class Register extends React.Component {
   }
 
   render() {
+      //TODO: check the pattern in password
 
     if ( this.state.isSuccess ) {
       return <Redirect to="/login" />
