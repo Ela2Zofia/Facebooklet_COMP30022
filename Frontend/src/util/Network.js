@@ -3,9 +3,84 @@ class Network {
   // static HOST_CONTACTS = "http://localhost:" + `${process.env.PORT || 8000}` + "/api/contacts";
   // static HOST_MEETINGS = "http://localhost:" + `${process.env.PORT || 8000}` + "/api/meetings";
   // static HOST_REGISTER = "http://localhost:" + `${process.env.PORT || 8000}` + "/api/register";
-  static HOST_CONTACTS = "/api/contacts";
+
+  /*static HOST_CONTACTS = "/api/contacts";
   static HOST_MEETINGS = "/api/meetings";
   static HOST_REGISTER = "/api/register";
+  static HOST_LOGIN = "/api/login";
+  static HOST_FORGET = "/api/forgot";
+  static HOST_RESET = "/api/reset";*/
+
+
+  static HOST_CONTACTS = "https://localhost:8000/api/contacts";
+  static HOST_MEETINGS = "https://localhost:8000/api/meetings";
+  static HOST_REGISTER = "https://localhost:8000/api/register";
+  static HOST_LOGIN = "https://localhost:8000/api/login";
+  static HOST_FORGET = "https://localhost:8000/api/forgot";
+  static HOST_RESET = "https://localhost:8000/api/reset";
+
+
+  static async loginUserNet( userInfo ) {
+    const res =  await fetch(this.HOST_LOGIN, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify( userInfo ),
+      }
+    )
+
+    if ( !res.ok ) {
+      throw new Error( `HTTP error! status: ${res.status}` );
+    }
+
+    return await res.json();
+  }
+
+
+  static async registerUserNet( userInfo ) {
+    const res =  await fetch( this.HOST_REGISTER, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify( userInfo ),
+      }
+    );
+
+    if ( !res.ok ) {
+      throw new Error( `HTTP error! status: ${res.status}` );
+    }
+
+    return await res.json();
+  }
+
+
+  static async forgetUserNet( userInfo ) {
+    const res =  await fetch( this.HOST_FORGET, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify( userInfo ),
+      }
+    );
+    if ( !res.ok ) {
+      throw new Error( `HTTP error! status: ${res.status}` );
+    }
+
+    return await res.json();
+  }
+
+  static async resetUserNet( userInfo ) {
+    const res =  await fetch(this.HOST_RESET, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify( userInfo ),
+      }
+    );
+    if ( !res.ok ) {
+      throw new Error( `HTTP error! status: ${res.status}` );
+    }
+
+    return await res.json();
+  }
+
+
 
   static async addContactNet( user, contact ) {
     const res = await fetch( this.HOST_CONTACTS, {
@@ -21,9 +96,9 @@ class Network {
       throw new Error( `HTTP error! status: ${res.status}` );
     }
 
-    const data = await res.json()
-    return data;
+    return await res.json();
   };
+
 
   static async fetchContactsNet( user ) {
     const HOST = this.HOST_CONTACTS + "?_sort=firstName";
@@ -40,10 +115,9 @@ class Network {
       throw new Error( `HTTP error! status: ${res.status}` );
     }
 
-    const data = await res.json();
-    // console.log(data);
-    return data;
+    return await res.json();
   }
+
 
   static async delContactNet( user, id ) {
     const HOST = this.HOST_CONTACTS + "/" + id;
@@ -59,6 +133,7 @@ class Network {
       throw new Error( `HTTP error! status: ${res.status}` );
     }
   };
+
 
   static async editContactNet( user, contact ) {
     const HOST = this.HOST_CONTACTS + "/" + contact._id;
@@ -76,6 +151,7 @@ class Network {
     }
   };
 
+
   static async searchContactNet( user, text ) {
     const HOST = this.HOST_CONTACTS + "?_sort=firstName&q=" + text;
     const res = await fetch( HOST, {
@@ -90,19 +166,9 @@ class Network {
       throw new Error( `HTTP error! status: ${res.status}` );
     }
 
-    const data = await res.json();
     // console.log(data);
-    return data;
+    return await res.json();
   };
-
-  static registerUserNet( userInfo ) {
-    return fetch( this.HOST_REGISTER, {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify( userInfo ),
-    }
-    );
-  }
 
 
   static async fetchMeetingsNet( user ) {
@@ -120,9 +186,9 @@ class Network {
       throw new Error( `HTTP error! status: ${res.status}` );
     }
 
-    const data = await res.json();
-    return data;
+    return await res.json();
   }
+
 
   static async addMeetingsNet( user, meeting ) {
     const res = await fetch( this.HOST_MEETINGS, {
@@ -138,8 +204,7 @@ class Network {
       throw new Error( `HTTP error! status: ${res.status}` );
     }
 
-    const data = await res.json()
-    return data;
+    return await res.json();
   };
 
 
@@ -157,6 +222,7 @@ class Network {
       throw new Error( `HTTP error! status: ${res.status}` );
     }
   };
+
 
   static async editMeetingNet( user, meeting ) {
     const HOST = this.HOST_MEETINGS + "/" + meeting._id;

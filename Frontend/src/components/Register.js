@@ -45,24 +45,24 @@ class Register extends React.Component {
     return false;
   }
 
-  handleSubmit = ( event ) => {
+  handleSubmit = async (event) => {
+    console.time("ValueChanged");
     event.preventDefault();
-    let { username, email, password1, password2 } = this.state;
-    console.log( typeof ( password1 ) );
-    if ( this.validate( username, email, password1, password2 ) ) {
-      Network.registerUserNet(
-        { username: username, email: email, password: password1 }
-      ).then( response => {
-        return response.json();
-      } ).then( response => {
-        if ( response.isCorrect ) {
-          alert( "Registration successful" );
-          this.setState( { isSuccess: true } )
-        }
-        else {
-          alert( "The username or email have been used" );
-        }
-      } );
+    let {username, email, password1, password2} = this.state;
+
+    if (this.validate(username, email, password1, password2)) {
+
+      const serverData = await Network.registerUserNet(
+        {username: username, email: email, password: password1}
+      )
+
+      if (serverData.isCorrect) {
+        alert("Registration successful");
+        console.timeEnd("ValueChanged");
+        this.setState({isSuccess: true})
+      } else {
+        alert("The username or email have been used");
+      }
     }
 
   }
