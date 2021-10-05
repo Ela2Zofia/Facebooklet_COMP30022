@@ -32,7 +32,7 @@ router.post("/", async (req, res, next) => {
     const data = await newMeeting(belongsWho, req.body);
     let greating = "Dear " + data.participants[0].lastName + " " + data.participants[0].firstName + "\n\n" + belongsWho + " has invited you to meeting! " + "Please remember to attend the meeting " + data.link + " in " + data.time + " at " + data.date + ".\n\n" + "decription: " + data.participants[0].description;
     var mailOptions = {
-      from: "itprojectexample.com",
+      from: "itprojectexample@outlook.com",
       to: data.participants[0].email,
       subject: data.topic,
       text: greating,

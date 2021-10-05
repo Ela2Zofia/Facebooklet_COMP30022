@@ -114,7 +114,7 @@ app.post("/api/forgot", async function (req, res) {
       text += data[index].username;
     }
     var mailOptions = {
-      from: "itprojectexample.com",
+      from: "itprojectexample@outlook.com",
       to: email,
       subject: text.concat(": Your verification code"),
       text: randomNumber.toString(),
