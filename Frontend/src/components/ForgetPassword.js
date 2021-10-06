@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import PubSub from 'pubsub-js'
+import Network from "../util/Network";
 
 class ForgetPassword extends React.Component {
   state = {
@@ -21,27 +22,19 @@ class ForgetPassword extends React.Component {
     return false;
   }
 
-  handleSubmit = ( event ) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    let { email } = this.state;
-    if ( this.validate( email ) ) {
-      fetch( 'http://127.0.0.1:8000/forgot', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify( { email: email } ),
+    let {email} = this.state;
+    if (this.validate(email)) {
+      const serverData = await Network.forgetUserNet({email: email})
+
+      if (serverData.isCorrect) {
+        alert("A verification code has been sent to your mail");
+        this.setState({isSuccess: true})
+        PubSub.publish("email sent", {email: email});
+      } else {
+        alert("Can't find the email");
       }
-      ).then( response => {
-        return response.json();
-      } ).then( response => {
-        if ( response.isCorrect ) {
-          alert( "A verification code has been sent to your mail" );
-          this.setState( { isSuccess: true } )
-            PubSub.publish("email sent",{email:email});
-        }
-        else {
-          alert( "Can't find the email" );
-        }
-      } );
     }
   }
 

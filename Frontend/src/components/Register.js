@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
+import Network from "../util/Network";
 class Register extends React.Component {
   state = {
     username: '',
@@ -42,27 +43,24 @@ class Register extends React.Component {
     return false;
   }
 
-  handleSubmit = ( event ) => {
+  handleSubmit = async (event) => {
+    console.time("ValueChanged");
     event.preventDefault();
-    let { username, email, password1, password2 } = this.state;
-    console.log( typeof ( password1 ) );
-    if ( this.validate( username, email, password1, password2 ) ) {
-      fetch( 'http://127.0.0.1:8000/register', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify( { username: username, email: email, password: password1 } ),
+    let {username, email, password1, password2} = this.state;
+
+    if (this.validate(username, email, password1, password2)) {
+
+      const serverData = await Network.registerUserNet(
+        {username: username, email: email, password: password1}
+      )
+
+      if (serverData.isCorrect) {
+        alert("Registration successful");
+        console.timeEnd("ValueChanged");
+        this.setState({isSuccess: true})
+      } else {
+        alert("The username or email have been used");
       }
-      ).then( response => {
-        return response.json();
-      } ).then( response => {
-        if ( response.isCorrect ) {
-          alert( "Registration successful" );
-          this.setState( { isSuccess: true } )
-        }
-        else {
-          alert( "The username or email have been used" );
-        }
-      } );
     }
 
   }

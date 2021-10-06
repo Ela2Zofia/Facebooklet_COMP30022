@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import PubSub from 'pubsub-js'
+import Network from "../util/Network";
 
 class Reset extends React.Component {
     state = {
@@ -53,28 +54,18 @@ class Reset extends React.Component {
         return false;
     }
 
-    handleSubmit = ( event ) => {
-        event.preventDefault();
-        let {email, code, password1, password2 } = this.state;
-        if ( this.validate( code, password1, password2 ) ) {
-            fetch( 'http://127.0.0.1:8000/reset', {
-                    method: 'POST',
-                    headers: { 'Content-type': 'application/json' },
-                    body: JSON.stringify( {  email: email, code: code, password: password1 } ),
-                }
-            ).then( response => {
-                return response.json();
-            } ).then( response => {
-                if ( response.isCorrect ) {
-                    alert( "Reset success" );
-                    this.setState( { isSuccess: true } )
-                }
-                else {
-                    alert( "The verification code is wrong" );
-                }
-            } );
+    handleSubmit = async (event) => {
+      event.preventDefault();
+      let {email, code, password1, password2} = this.state;
+      if (this.validate(code, password1, password2)) {
+        const serverData = await Network.resetUserNet({email: email, code: code, password: password1})
+        if (serverData.isCorrect) {
+          alert("Reset success");
+          this.setState({isSuccess: true})
+        } else {
+          alert("The verification code is wrong");
         }
-
+      }
     }
 
     render() {

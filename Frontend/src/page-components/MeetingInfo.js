@@ -10,6 +10,7 @@ class MeetingInfo extends React.Component{
     }
 
     componentDidMount() {
+        // TODO: unable to update in time
         console.log("@")
     }
 
