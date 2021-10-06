@@ -11,9 +11,9 @@ var md5 = require("md5-node");
 var nodemailer = require("nodemailer");
 var code_dictonary = {};
 var transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: "Outlook",
   auth: {
-    user: "itprojectexample@gmail.com",
+    user: "itprojectexample@outlook.com",
     pass: "COMP30022",
   },
 });
@@ -116,7 +116,7 @@ app.post("/api/forgot", async function (req, res) {
       text += data[index].username;
     }
     var mailOptions = {
-      from: "itprojectexample.com",
+      from: "itprojectexample@outlook.com",
       to: email,
       subject: text.concat(": Your verification code"),
       text: randomNumber.toString(),

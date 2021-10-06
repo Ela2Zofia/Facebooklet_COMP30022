@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var nodemailer = require('nodemailer');
 
 const {
     getList,
@@ -8,6 +9,13 @@ const {
     delMeeting,
   } = require("../controller/meeting")
 
+var transporter = nodemailer.createTransport({
+  service: "Outlook",
+  auth: {
+    user: "itprojectexample@outlook.com",
+    pass: "COMP30022",
+  },
+});
 
 // get meeting list and its page
 router.get("/", async (req, res, next) => {
@@ -22,7 +30,26 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
     const belongsWho = req.headers.user;
     const data = await newMeeting(belongsWho, req.body);
-    res.json(data);
+    let greating = "Dear " + data.participants[0].lastName + " " + data.participants[0].firstName + "\n\n" + belongsWho + " has invited you to meeting! " + "Please remember to attend the meeting " + data.link + " in " + data.time + " at " + data.date + ".\n\n" + "decription: " + data.participants[0].description;
+    var mailOptions = {
+      from: "itprojectexample@outlook.com",
+      to: data.participants[0].email,
+      subject: data.topic,
+      text: greating,
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        res.send(error);
+      } else {
+        console.log("Email sent!");
+        res.send(back);
+      }
+    });
+    if (belongsWho == ""){
+      res.json()
+    }else{
+      res.json(data);
+    }
     return;
 })
 
