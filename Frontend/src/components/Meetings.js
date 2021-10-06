@@ -15,6 +15,19 @@ class Meetings extends React.Component{
         this.props.setMeetings(serverData)
     }
 
+    sortMeetings = (a,b)=>{
+      let dateA = new Date(`${a.date} ${a.time}`)
+      let dateB = new Date(`${b.date} ${b.time}`)
+      if(dateA > dateB){
+        return -1
+      }
+      else if(dateA < dateB){
+        return 1
+      }
+      else{
+        return 0
+      }
+    }
 
 
 
@@ -26,16 +39,13 @@ class Meetings extends React.Component{
         //         <h1>This is meetings page</h1>
         //     </div>
         // )
-
-
-
         return (
             <div className="Container">
                 <MeetingTopbar/>
                 <div className="InnerContainer">
                     {this.props.meetings.length === 0 ?
                         <h3>No Meeting</h3>
-                        : this.props.meetings.map(
+                        : this.props.meetings.sort(this.sortMeetings).map(
                             (meeting) =>{
                                 return(
                                     <Meeting

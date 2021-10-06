@@ -34,8 +34,6 @@ class Register extends React.Component {
       alert( "Please enter your email" );
     } else if ( password1 === '' ) {
       alert( "Please enter your password" );
-    } else if ( password1.length < 6 || password1.length > 20 ) {
-      alert( "Use 6-20 characters for your password" )
     } else if ( password2 !== password1 ) {
       alert( "Those passwords didn’t match. Try again." );
     } else {
@@ -70,7 +68,6 @@ class Register extends React.Component {
   }
 
   render() {
-      //TODO: check the pattern in password
 
     if ( this.state.isSuccess ) {
       return <Redirect to="/login" />
@@ -101,7 +98,7 @@ class Register extends React.Component {
 
                   <label>
                     <p>Password</p>
-                    <input onChange={ this.savePassword1 } type="password" name="Password" placeholder=" " />
+                    <input onChange={ this.savePassword1 } type="password" name="Password" placeholder=" " pattern="/^(\w){6,20}$/" title="Password should contain only 6-20 Numbers, letters and '_'"/>
                     <div className="border"></div>
                   </label>
 
