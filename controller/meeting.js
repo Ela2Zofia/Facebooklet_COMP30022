@@ -80,9 +80,17 @@ const delMeeting = async (id) => {
     });
 };
 
+const findMeeting = async (id) => {
+    const meeting = await Meeting.findById({
+      _id: id,
+    });
+    return meeting;
+};
+
 module.exports = {
     getList,
     newMeeting,
     updateMeeting,
     delMeeting,
+    findMeeting,
 };
