@@ -71,7 +71,8 @@ function ContactForm({open, onClose}) {
         dispatch(addContact(data));
       }
 
-      add();      
+      add();
+      alert("Successfully added");
 
       resetInput();
     }
