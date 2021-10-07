@@ -40,6 +40,11 @@ router.post("/", async (req, res, next) => {
     const belongsWho = req.headers.user;
     const data = await newMeeting(belongsWho, req.body);
     
+    if (belongsWho == ""){
+      res.json()
+    }else{
+      res.json(data);
+    }
     for (let i = 0; i < data.participants.length; i++){
       let greating = "Dear " + data.participants[i].lastName + " " + data.participants[i].firstName + "\n\n"
        + belongsWho + " has invited you to a meeting! " + "Please remember to attend the meeting " + data.link + " in " + data.time + " at " + data.date + ".\n\n" + "decription: " + data.participants[i].description;
@@ -51,17 +56,13 @@ router.post("/", async (req, res, next) => {
       };
       await transporter.sendMail(mailOptions);
     }
-    if (belongsWho == ""){
-      res.json()
-    }else{
-      res.json(data);
-    }
     return;
 })
 
 // update meeting information
 router.put("/:id", async (req, res, next) => {
     await updateMeeting(req.params.id, req.body);
+    res.status(200).send();
     meeting = await findMeeting(req.params.id);
     for (let i = 0; i < meeting.participants.length; i++){
       let greating = "Dear " + meeting.participants[i].lastName + " " + meeting.participants[i].firstName + "\n\n"
@@ -74,12 +75,13 @@ router.put("/:id", async (req, res, next) => {
       };
       await transporter.sendMail(mailOptions);
     }
-    res.status(200).send();
   });
   
 // delete chosen meeting
 router.delete("/:id", async (req, res, next) => {
     const id = req.params.id;
+    
+    res.status(200).send();
     meeting = await findMeeting(id);
     for (let i = 0; i < meeting.participants.length; i++){
       let greating = "Dear " + meeting.participants[i].lastName + " " + meeting.participants[i].firstName + "\n\n"
@@ -94,7 +96,6 @@ router.delete("/:id", async (req, res, next) => {
     }
     await delMeeting(id);
     
-    res.status(200).send();
 });
   
 module.exports = router;
