@@ -4,20 +4,12 @@ class Network {
   // static HOST_MEETINGS = "http://localhost:" + `${process.env.PORT || 8000}` + "/api/meetings";
   // static HOST_REGISTER = "http://localhost:" + `${process.env.PORT || 8000}` + "/api/register";
 
-  /*static HOST_CONTACTS = "/api/contacts";
+  static HOST_CONTACTS = "/api/contacts";
   static HOST_MEETINGS = "/api/meetings";
   static HOST_REGISTER = "/api/register";
   static HOST_LOGIN = "/api/login";
   static HOST_FORGET = "/api/forgot";
-  static HOST_RESET = "/api/reset";*/
-
-
-  static HOST_CONTACTS = "https://localhost:8000/api/contacts";
-  static HOST_MEETINGS = "https://localhost:8000/api/meetings";
-  static HOST_REGISTER = "https://localhost:8000/api/register";
-  static HOST_LOGIN = "https://localhost:8000/api/login";
-  static HOST_FORGET = "https://localhost:8000/api/forgot";
-  static HOST_RESET = "https://localhost:8000/api/reset";
+  static HOST_RESET = "/api/reset";
 
 
   static async loginUserNet( userInfo ) {
@@ -209,6 +201,7 @@ class Network {
 
 
   static async delMeetingNet( user, id ) {
+    console.log(`delete: ${id}`)
     const HOST = this.HOST_MEETINGS + "/" + id;
     const res = await fetch( HOST, {
       method: "DELETE",
@@ -225,6 +218,7 @@ class Network {
 
 
   static async editMeetingNet( user, meeting ) {
+    console.log(`edit: ${meeting.toString()}`)
     const HOST = this.HOST_MEETINGS + "/" + meeting._id;
     const res = await fetch( HOST, {
       method: "PUT",

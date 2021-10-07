@@ -83,25 +83,25 @@ class Register extends React.Component {
                 <section>
 
                   <label>
-                    <p>Username</p>
+                    <p>*Username</p>
                     <input onChange={ this.saveUsername } type="text" name="Username" placeholder=" " />
                     <div className="border"></div>
                   </label>
 
                   <label>
-                    <p>E-mail</p>
+                    <p>*E-mail</p>
                     <input onChange={ this.saveEmail } type="email" name="Email" placeholder=" " />
                     <div className="border"></div>
                   </label>
 
                   <label>
-                    <p>Password</p>
-                    <input onChange={ this.savePassword1 } type="password" name="Password" placeholder=" " pattern="/^(\w){6,20}$/" title="Password should contain only 6-20 Numbers, letters and '_'"/>
+                    <p>*Password</p>
+                    <input onChange={ this.savePassword1 } type="password" name="Password" placeholder=" " pattern="^(\w){6,20}$" title="Password should contain only 6-20 Numbers, letters and '_'"/>
                     <div className="border"></div>
                   </label>
 
                   <label>
-                    <p>Comfirm Password</p>
+                    <p>*Confirm Password</p>
                     <input onChange={ this.savePassword2 } type="password" name="Confirm_Password" placeholder=" " />
                     <div className="border"></div>
                   </label>

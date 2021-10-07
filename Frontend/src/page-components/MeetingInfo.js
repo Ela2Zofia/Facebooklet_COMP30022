@@ -9,10 +9,6 @@ class MeetingInfo extends React.Component{
         isEdit:false
     }
 
-    componentDidMount() {
-        // TODO: unable to update in time
-        console.log("@")
-    }
 
 
     render(){
@@ -63,7 +59,7 @@ class MeetingInfo extends React.Component{
                 )
             }
             else{
-                return (<MeetingForm open = {this.state.isEdit} onClose = {()=>{this.setState({isEdit:false})}} meeting = {this.props.meeting}></MeetingForm>)
+                return (<MeetingForm open = {this.state.isEdit} onClose = {()=>{this.setState({isEdit:false})}} meeting = {this.props.meeting}/>)
             }
 
 

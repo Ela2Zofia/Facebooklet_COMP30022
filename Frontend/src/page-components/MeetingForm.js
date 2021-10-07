@@ -56,7 +56,7 @@ class MeetingForm extends React.Component{
         this.setState( { duration: this.state.duration + event.target.value*1 } );
     }
 
-    savePassword = (event) => {
+    savePassword = (event ) => {
       this.setState( { password: event.target.value } )
     }
 
@@ -99,7 +99,6 @@ class MeetingForm extends React.Component{
             alert("Please select a valid duration")
         }
         else{
-            console.log("true")
             return true
         }
         return false;
@@ -118,8 +117,8 @@ class MeetingForm extends React.Component{
                 this.props.onClose();
             }
             else{
-                await Network.addMeetingsNet(this.props.user, this.state);
-                this.props.addMeeting(this.state);
+                const data = await Network.addMeetingsNet(this.props.user, this.state);
+                this.props.addMeeting(data);
                 alert("Successfully added")
                 this.resetState();
             }
@@ -155,7 +154,7 @@ class MeetingForm extends React.Component{
                     <input value = {this.state.meetingNumber} type="text" placeholder="**MANDATORY**" onChange={this.saveMeetingNumber}/>
 
                     <label>Password</label>
-                    <input value = {this.state.Password} type="text" placeholder="" onChange={this.savePassword}/>
+                    <input value = {this.state.password} type="text" placeholder="" onChange={this.savePassword}/>
 
                     <label>*Meeting Link</label>
                     <input value = {this.state.link} type="text" placeholder="https://.... **MANDATORY**" onChange={this.saveLink} pattern="^(https:\/\/).*" title="Please enter a valid link starting with 'https://'"/>

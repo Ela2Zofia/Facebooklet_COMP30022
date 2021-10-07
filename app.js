@@ -163,11 +163,11 @@ app.use("/api/contacts", contactRouter);
 // meeting page
 app.use("/api/meetings", meetingRouter);
 
-/*app.use(express.static(path.join(__dirname, '/Frontend/build')));
+app.use(express.static(path.join(__dirname, '/Frontend/build')));
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '/Frontend/build', 'index.html'));
-});*/
+});
 
 app.listen(process.env.PORT || 8000, () => {
   console.log("The server is ON, port " + `${process.env.PORT || 8000}` + " is listening");

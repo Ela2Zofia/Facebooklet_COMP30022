@@ -1,32 +1,36 @@
 import React from 'react'
 import Meeting from '../page-components/Meeting'
 import {connect} from "react-redux";
-import clearSelected from '../actions/clearSelected';
 import setMeetings from "../actions/setMeetings";
-import endEdit from '../actions/endEdit';
+import endEdit from "../actions/endEdit"
+import clearSelected from "../actions/clearSelected"
 import Network from '../util/Network'
 import MeetingTopbar from "../page-components/MeetingTopBar";
 import "../css/Meetings.css"
-class Meetings extends React.Component{
-    //TODO: time stamp
 
+
+class Meetings extends React.Component{
 
     async componentDidMount() {
-        const serverData = await Network.fetchMeetingsNet(this.props.user)
-        this.props.setMeetings(serverData)
+        const serverData = await Network.fetchMeetingsNet(this.props.user);
+        this.props.setMeetings(serverData);
+        this.props.endEdit();
+        this.props.clearSelected();
+
     }
 
-    sortMeetings = (a,b)=>{
-      let dateA = new Date(`${a.date} ${a.time}`)
-      let dateB = new Date(`${b.date} ${b.time}`)
+
+  sortMeetings = (a,b)=>{
+      let dateA = new Date(`${a.date} ${a.time}`);
+      let dateB = new Date(`${b.date} ${b.time}`);
       if(dateA > dateB){
-        return -1
+        return -1;
       }
       else if(dateA < dateB){
-        return 1
+        return 1;
       }
       else{
-        return 0
+        return 0;
       }
     }
 
@@ -34,12 +38,9 @@ class Meetings extends React.Component{
 
 
     render(){
-        // return(
-        //     <div className="Container">
-        //         <Topbar />
-        //         <h1>This is meetings page</h1>
-        //     </div>
-        // )
+
+      console.log("Render Meetings");
+
         return (
             <div className="Container">
                 <MeetingTopbar/>
@@ -64,6 +65,6 @@ class Meetings extends React.Component{
 
 export default connect(
     state => ({meetings: state.meetings, user: state.user, selected: state.selected}),
-    {setMeetings}
+    {setMeetings,endEdit,clearSelected}
 )(Meetings)
 
