@@ -19,6 +19,8 @@
      * Week 12
    * Meeting with client:
      1. 06/08/2021 5:30 p.m.
+     2. 10/09/2021 5:00 p.m.
+     3. 07/10/2021 4:10 p.m.
    * Development timeline
       * Week3: Learn all the tools, Translating the requirment: Javascript, html, css
       * Week4: Domain Model, contining on leanning Express, MongoDB and React
