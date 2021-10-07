@@ -9,9 +9,9 @@
    5. Communication: Wechat
    6. Server: Ali Cloud
 ## 2. Work allocation
-   1. Frontend: Derrick, Michael
-   2. Backend: Simon, sc, Whale Fall
-   3. Testing: 
+   1. Frontend: Jiawei Li, Zhonghan Gu
+   2. Backend: Zexu Huang, Shen Chang, Hongyu Su
+   3. Testing: All members
 ## 3. Timeline
    * Assessment date:
      * Week 6
