@@ -24,7 +24,7 @@
       * Week4: Domain Model, contining on leanning Express, MongoDB and React
       * Week5：Develop Welcome page & Contacts List
       * Week6: Given an basic model for Develop Welcome page & Contacts List
-      * Week7:
+      * Week7: Implement meetings and Calender Component
       * Week8: Web Server
       * Week9: Testing
       * Week10: Write Report
