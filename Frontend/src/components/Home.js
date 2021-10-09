@@ -56,7 +56,7 @@ function Home() {
 
     async function getMeetings() {
       const serverData = await Network.fetchMeetingsNet( user );
-      setMeetingNum( serverData.length )
+      setMeetingNum( serverData.filter(data => new Date() < new Date(`${data.date} ${data.time}`)).length)
     }
 
     getMeetings();
