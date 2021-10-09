@@ -35,8 +35,6 @@ class Register extends React.Component {
       alert( "Please enter your email" );
     } else if ( password1 === '' ) {
       alert( "Please enter your password" );
-    } else if ( password1.length < 6 || password1.length > 20 ) {
-      alert( "Use 6-20 characters for your password" )
     } else if ( password2 !== password1 ) {
       alert( "Those passwords didn’t match. Try again." );
     } else {
@@ -45,30 +43,29 @@ class Register extends React.Component {
     return false;
   }
 
-  handleSubmit = ( event ) => {
+  handleSubmit = async (event) => {
+    console.time("ValueChanged");
     event.preventDefault();
-    let { username, email, password1, password2 } = this.state;
-    console.log( typeof ( password1 ) );
-    if ( this.validate( username, email, password1, password2 ) ) {
-      Network.registerUserNet(
-        { username: username, email: email, password: password1 }
-      ).then( response => {
-        return response.json();
-      } ).then( response => {
-        if ( response.isCorrect ) {
-          alert( "Registration successful" );
-          this.setState( { isSuccess: true } )
-        }
-        else {
-          alert( "The username or email have been used" );
-        }
-      } );
+    let {username, email, password1, password2} = this.state;
+
+    if (this.validate(username, email, password1, password2)) {
+
+      const serverData = await Network.registerUserNet(
+        {username: username, email: email, password: password1}
+      )
+
+      if (serverData.isCorrect) {
+        alert("Registration successful");
+        console.timeEnd("ValueChanged");
+        this.setState({isSuccess: true})
+      } else {
+        alert("The username or email have been used");
+      }
     }
 
   }
 
   render() {
-      //TODO: check the pattern in password
 
     if ( this.state.isSuccess ) {
       return <Redirect to="/login" />
@@ -86,25 +83,25 @@ class Register extends React.Component {
                 <section>
 
                   <label>
-                    <p>Username</p>
+                    <p>*Username</p>
                     <input onChange={ this.saveUsername } type="text" name="Username" placeholder=" " />
                     <div className="border"></div>
                   </label>
 
                   <label>
-                    <p>E-mail</p>
+                    <p>*E-mail</p>
                     <input onChange={ this.saveEmail } type="email" name="Email" placeholder=" " />
                     <div className="border"></div>
                   </label>
 
                   <label>
-                    <p>Password</p>
-                    <input onChange={ this.savePassword1 } type="password" name="Password" placeholder=" " />
+                    <p>*Password</p>
+                    <input onChange={ this.savePassword1 } type="password" name="Password" placeholder=" " pattern="^(\w){6,20}$" title="Password should contain only 6-20 Numbers, letters and '_'"/>
                     <div className="border"></div>
                   </label>
 
                   <label>
-                    <p>Comfirm Password</p>
+                    <p>*Confirm Password</p>
                     <input onChange={ this.savePassword2 } type="password" name="Confirm_Password" placeholder=" " />
                     <div className="border"></div>
                   </label>

@@ -75,6 +75,7 @@ function ContactInfo( { open, contact, onClose } ) {
           description: desc
         }
       ) );
+      alert("Successfully updated")
 
       setEdit( false );
     }
