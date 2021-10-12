@@ -46,8 +46,8 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    top: 0%;
-    left: 0%;
+    top: 0;
+    left: 0;
 }
 
 .MeetingForm{
@@ -58,7 +58,7 @@
     background-color: rgb(238, 238, 238);
     position: fixed;
     width: 50vw;
-    height: 80vh;
+    height: 88vh;
     top: 10%;
     left: 25%;
     border-radius: 10px;

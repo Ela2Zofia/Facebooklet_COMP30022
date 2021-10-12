@@ -9,8 +9,9 @@ import MeetingInfo from "./MeetingInfo";
 class Meeting extends React.Component {
 
     state = {
-        isOpen: false
+        isOpen: false,
     }
+
 
     changeSelected = () => {
 
@@ -20,6 +21,7 @@ class Meeting extends React.Component {
             this.props.removeSelected(this.props.meeting._id);
         }
     }
+
 
     checkEdit = () => {
         if ( this.props.isEdit ) {
@@ -36,11 +38,13 @@ class Meeting extends React.Component {
     render() {
         const {meeting} = this.props;
 
-        return <div className="Meeting">
+        console.log()
+
+        return <div className="Meeting" style={{backgroundColor:new Date()< new Date(`${meeting.date} ${meeting.time}`)? 'white':'#E0E0E0'}}>
 
                 <div className="MeetingHeader">
                     <div className="Topic">{meeting.topic}</div>
-                    <div className="MeetingID">{meeting.meetingNumber}</div>
+                    <div className="StartTime">{`${meeting.date} ${meeting.time}`}</div>
                     <div className="Participants">
                         {meeting.participants.map((tag, key) => {
                             if (key > 2) {
@@ -53,7 +57,7 @@ class Meeting extends React.Component {
                     </div>
                 </div>
 
-                <a className="link" target="_blank" href={meeting.link}>Meeting Link</a>
+                <a className="link" target="_blank" rel="noopener noreferrer" href={meeting.link}>Meeting Link</a>
 
                 { this.checkEdit()}
                 <MeetingInfo open={ this.state.isOpen } meeting = { this.props.meeting } onClose={ () => this.setState( {isOpen:false} ) } />

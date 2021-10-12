@@ -9,9 +9,6 @@ class MeetingInfo extends React.Component{
         isEdit:false
     }
 
-    componentDidMount() {
-        console.log("@")
-    }
 
 
     render(){
@@ -28,11 +25,12 @@ class MeetingInfo extends React.Component{
                             </div>
 
                             <div className="ContactInfoInnerWrap">
-                                <div className="ContactDetail">
+                                <div className="MeetingDetail">
 
                                     <div className="Topic">{meeting.topic}</div>
 
                                     <div>Meeting Number: {meeting.meetingNumber}</div>
+                                    <div>Password: {meeting.password}</div>
                                     <div><span>Link: </span> <a href={meeting.link}>{meeting.link}</a></div>
                                     <div>Date: {meeting.date}</div>
                                     <div>Start Time: {meeting.time}</div>
@@ -61,7 +59,7 @@ class MeetingInfo extends React.Component{
                 )
             }
             else{
-                return (<MeetingForm open = {this.state.isEdit} onClose = {()=>{this.setState({isEdit:false})}} meeting = {this.props.meeting}></MeetingForm>)
+                return (<MeetingForm open = {this.state.isEdit} onClose = {()=>{this.setState({isEdit:false})}} meeting = {this.props.meeting}/>)
             }
 
 

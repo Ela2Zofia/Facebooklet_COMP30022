@@ -17,6 +17,7 @@ class MeetingForm extends React.Component{
     state = {
         topic:'Untitled',
         meetingNumber: '',
+        password: '',
         link:'',
         date:'',
         time:'',
@@ -26,9 +27,8 @@ class MeetingForm extends React.Component{
     }
 
     saveTopic = ( event ) => {
-        if (event.target.value !== '') {
-            this.setState({topic: event.target.value});
-        }
+      this.setState({topic: event.target.value});
+
     }
     saveMeetingNumber = ( event ) => {
         this.setState( { meetingNumber: event.target.value } );
@@ -56,6 +56,10 @@ class MeetingForm extends React.Component{
         this.setState( { duration: this.state.duration + event.target.value*1 } );
     }
 
+    savePassword = (event ) => {
+      this.setState( { password: event.target.value } )
+    }
+
     async componentDidMount() {
         const serverData = await Network.fetchContactsNet(this.props.user);
         this.props.setContacts(serverData)
@@ -67,6 +71,7 @@ class MeetingForm extends React.Component{
         this.setState({
             topic:'Untitled',
             meetingNumber: '',
+            password:'',
             link:'',
             date:'',
             time:'',
@@ -77,7 +82,6 @@ class MeetingForm extends React.Component{
     }
 
     validate = (state)=>{
-        //TODO: re expression to check link
 
         if (state.meetingNumber === ''){
             alert("Please enter a meeting number");
@@ -95,13 +99,13 @@ class MeetingForm extends React.Component{
             alert("Please select a valid duration")
         }
         else{
-            console.log("true")
             return true
         }
         return false;
     }
 
-    submitMeeting = async () => {
+    submitMeeting = async (event) => {
+        event.preventDefault();
         if (this.validate(this.state)) {
             if (this.props.meeting) {
                 const stateCopy = JSON.parse(JSON.stringify(this.state))
@@ -109,11 +113,13 @@ class MeetingForm extends React.Component{
                 stateCopy._id = this.props.meeting._id
                 await Network.editMeetingNet(this.props.user,stateCopy);
                 this.props.editMeeting(stateCopy);
+                alert("Successfully updated")
                 this.props.onClose();
             }
             else{
-                await Network.addMeetingsNet(this.props.user, this.state);
-                this.props.addMeeting(this.state);
+                const data = await Network.addMeetingsNet(this.props.user, this.state);
+                this.props.addMeeting(data);
+                alert("Successfully added")
                 this.resetState();
             }
         }
@@ -126,12 +132,12 @@ class MeetingForm extends React.Component{
 
 
     render(){
+      //TODO: defaultValue of participants
         if (!this.props.open) return null;
 
-        //TODO: can't delete the first letter of topic, can't reset participants
         return reactDom.createPortal(
             <div className="ContactFormWrapper">
-                <div className="MeetingForm">
+                <form className="MeetingForm" onSubmit={this.submitMeeting}>
 
                     <div className="TopbarCloseButton">
                         <RiCloseLine className="button" onClick={()=>{
@@ -140,14 +146,18 @@ class MeetingForm extends React.Component{
                         }} size={30}/>
                     </div>
 
+
                     <label>Topic</label>
                     <input value = {this.state.topic} type="text" placeholder="" onChange={this.saveTopic}/>
 
                     <label>*Meeting Number</label>
                     <input value = {this.state.meetingNumber} type="text" placeholder="**MANDATORY**" onChange={this.saveMeetingNumber}/>
 
+                    <label>Password</label>
+                    <input value = {this.state.password} type="text" placeholder="" onChange={this.savePassword}/>
+
                     <label>*Meeting Link</label>
-                    <input value = {this.state.link} type="text" placeholder="**MANDATORY**" onChange={this.saveLink}/>
+                    <input value = {this.state.link} type="text" placeholder="https://.... **MANDATORY**" onChange={this.saveLink} pattern="^(https:\/\/).*" title="Please enter a valid link starting with 'https://'"/>
 
                     <label>*Date</label>
                     <input value = {this.state.date} type = "date" placeholder="**MANDATORY**" onChange={this.saveDate}/>
@@ -197,10 +207,8 @@ class MeetingForm extends React.Component{
                     <label>Description</label>
                     <input value = {this.state.description} type="text" placeholder=" " onChange={this.saveDescription}/>
 
-                    <button onClick={()=>{
-                        this.submitMeeting();
-                    }}>Add</button>
-                </div>
+                    <button type ="submit">Save</button>
+                </form>
             </div>
             , document.getElementById("portal")
         )

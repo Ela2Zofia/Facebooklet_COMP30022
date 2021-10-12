@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import logIn from "../actions/logIn";
 import UserUtil from "../util/UserUtil";
+import Network from "../util/Network";
 function Login() {
     // eslint-disable-next-line
   const now = new Date();
@@ -35,34 +36,19 @@ function Login() {
     return false;
   }
 
-  const handleSubmit = ( event ) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log( username )
 
-    // dispatch( logIn( username ) );
-    // setSuccess( true );
-    // UserUtil.setUserWithExpiry( remember, username );
-
-
-    if ( validate( username, password ) ) {
-      fetch("/api/login", {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify( { username: username, password: password } ),
-      }
-      ).then( response => {
-        return response.json();
-      } ).then( response => {
-          if ( response.isCorrect) {
-              // Log in
-              dispatch( logIn( username ) );
-              setSuccess( true );
-              UserUtil.setUserWithExpiry( remember, username );
-          }
-          else {
-              alert( "Your username or password is incorrect" );
-          }
-      } );
+    if (validate(username, password)) {
+      const serverData = await Network.loginUserNet({username: username, password: password})
+      if (serverData.isCorrect) {
+          // Log in
+          dispatch(logIn(username));
+          setSuccess(true);
+          UserUtil.setUserWithExpiry(remember, username);
+        } else {
+          alert("Your username or password is incorrect");
+        }
     }
   }
 

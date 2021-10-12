@@ -11,9 +11,9 @@ var md5 = require("md5-node");
 var nodemailer = require("nodemailer");
 var code_dictonary = {};
 var transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: "Outlook",
   auth: {
-    user: "itprojectexample@gmail.com",
+    user: "itprojectexample@outlook.com",
     pass: "COMP30022",
   },
 });
@@ -84,6 +84,8 @@ app.post("/api/register", async function (req, res) {
   // console.log(data);
   if (result) {
     return res.send(false);
+  }else{
+    res.send(back);
   }
   var mailOptions = {
     from: "itprojectexample.com",
@@ -93,10 +95,10 @@ app.post("/api/register", async function (req, res) {
   };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      res.send(error);
+      // res.send(error);
     } else {
       console.log("Email sent!");
-      res.send(back);
+      // res.send(back);
     }
   });
   addInDb(username, md5(password), email);
@@ -114,7 +116,7 @@ app.post("/api/forgot", async function (req, res) {
       text += data[index].username;
     }
     var mailOptions = {
-      from: "itprojectexample.com",
+      from: "itprojectexample@outlook.com",
       to: email,
       subject: text.concat(": Your verification code"),
       text: randomNumber.toString(),
@@ -163,7 +165,6 @@ app.use("/api/contacts", contactRouter);
 // meeting page
 app.use("/api/meetings", meetingRouter);
 
-
 app.use(express.static(path.join(__dirname, '/Frontend/build')));
 
 app.get('*', function (req, res) {
@@ -171,5 +172,5 @@ app.get('*', function (req, res) {
 });
 
 app.listen(process.env.PORT || 8000, () => {
-  console.log("The server is ON, port" + `${process.env.PORT || 8000}` + "is listening");
+  console.log("The server is ON, port " + `${process.env.PORT || 8000}` + " is listening");
 });

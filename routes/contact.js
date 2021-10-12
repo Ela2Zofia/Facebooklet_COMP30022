@@ -26,7 +26,12 @@ router.get("/", async (req, res, next) => {
 
   //get the contact list
   const listData = await getList(belongsWho, keyword);
-  res.json(listData);
+  if(belongsWho === ""){
+    res.json();
+  }else{
+    res.json(listData);
+  }
+  
   return;
 });
 
@@ -34,13 +39,17 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   const belongsWho = req.headers.user;
   const data = await newContact(belongsWho, req.body);
-  res.json(data);
+  if(belongsWho == ""){
+    res.json();
+  }else{
+    res.json(data);
+  }
+  
   return;
 });
 
 // update contact information
 router.put("/:id", async (req, res, next) => {
-  console.log(req.body._id);
   await updateContact(req.params.id, req.body);
   res.status(200).send();
 });

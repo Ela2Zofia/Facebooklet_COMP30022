@@ -1,6 +1,6 @@
 import {VideoCameraAddOutlined} from '@ant-design/icons';
 import MeetingForm from "./MeetingForm";
-import { useState,useEffect} from "react";
+import { useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import "../css/MeetingTopBar.css";
@@ -17,10 +17,6 @@ function MeetingTopbar() {
     const isEdit = useSelector( state => state.isEdit );
     const selected = useSelector( state => state.selected );
     const user = useSelector( state => state.user );
-
-    const meetings = useSelector( state => state.meetings );
-
-    // const user = useSelector(state => state.user);
 
 
     // delete all selected contacts
@@ -57,7 +53,6 @@ function MeetingTopbar() {
                                 () => {
                                     dispatch( toggleEdit() );
                                     dispatch( clearSelected() );
-                                    console.log("After toggle and clear",meetings)
                                 }
                             }>Manage</button>
                             {
