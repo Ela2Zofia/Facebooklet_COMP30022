@@ -10,6 +10,9 @@ const MeetingSchema = mongoose.Schema({
     type: String,
     required: true, // must have meeting number
   },
+  password: {
+    type: String,
+  },
   link:{
     type: String,
     required: true, // must have meeting link
