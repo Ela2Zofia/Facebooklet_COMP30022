@@ -18,6 +18,7 @@ const getList = async (userName) => {
 const newMeeting = async (userName, meetingData = {}) => {
     const topic = meetingData.topic;
     const meetingNumber = meetingData.meetingNumber;
+    const password = meetingData.password;
     const link = meetingData.link;
     const date = meetingData.date;
     const time = meetingData.time;
@@ -29,6 +30,7 @@ const newMeeting = async (userName, meetingData = {}) => {
     const meeting = await Meeting.create({
         topic,
         meetingNumber,
+        password,
         link,
         date,
         time,
@@ -45,6 +47,7 @@ const newMeeting = async (userName, meetingData = {}) => {
 const updateMeeting = async (id, meetingData = {}) => {
     const topic = meetingData.topic;
     const meetingNumber = meetingData.meetingNumber;
+    const password = meetingData.password;
     const link = meetingData.link;
     const date = meetingData.date;
     const time = meetingData.time;
@@ -57,6 +60,7 @@ const updateMeeting = async (id, meetingData = {}) => {
       {
         topic,
         meetingNumber,
+        password,
         link,
         date,
         time,
