@@ -45,14 +45,13 @@ router.post("/", async (req, res, next) => {
     }else{
       res.json(data);
     }
-    
     for (let i = 0; i < data.participants.length; i++){
       let greating = "Dear " + data.participants[i].lastName + " " + data.participants[i].firstName + "\n\n"
-       + belongsWho + " has invited you to a meeting! " + "Please remember to attend the meeting " + data.link + " in " + data.time + " at " + data.date + ".\n\n" + "Your meetingNumber is "+data.meetingNumber+"\n"+"decription: " + data.participants[i].description;
+       + belongsWho + " has invited you to a meeting! " + "Please remember to attend the meeting " + data.link + " in " + data.time + " at " + data.date + ".\n\n" + "Your meeting number is "+data.meetingNumber+"\n"+"Your Password is "+data.password+"\n"+"decription: " + data.participants[i].description;
        var mailOptions = {
         from: "itprojectexample@outlook.com",
         to: data.participants[i].email,
-        subject: data.topic,
+        subject: "face-booklet meeting notification",
         text: greating,
       };
       await transporter.sendMail(mailOptions);
@@ -67,11 +66,11 @@ router.put("/:id", async (req, res, next) => {
     meeting = await findMeeting(req.params.id);
     for (let i = 0; i < meeting.participants.length; i++){
       let greating = "Dear " + meeting.participants[i].lastName + " " + meeting.participants[i].firstName + "\n\n"
-       + "Your Meeting " + meeting.meetingNumber + " with link " + meeting.link + " in " + meeting.time + " at " + meeting.date + " has been updated" + ".\n\n"+ "Your meetingNumber is "+data.meetingNumber+"\n" + "decription: " + meeting.participants[i].description;
+       + "Your Meeting " + meeting.meetingNumber + " with link " + meeting.link + " in " + meeting.time + " at " + meeting.date + " has been updated" + ".\n\n"+ "Your meeting number is "+meeting.meetingNumber+"\n" + "Your Password is "+meeting.password+"\n"+"decription: " + meeting.participants[i].description;
       var mailOptions = {
         from: "itprojectexample@outlook.com",
         to: meeting.participants[i].email,
-        subject: meeting.topic,
+        subject: "face-booklet meeting notification",
         text: greating,
       };
       await transporter.sendMail(mailOptions);
@@ -86,11 +85,11 @@ router.delete("/:id", async (req, res, next) => {
     meeting = await findMeeting(id);
     for (let i = 0; i < meeting.participants.length; i++){
       let greating = "Dear " + meeting.participants[i].lastName + " " + meeting.participants[i].firstName + "\n\n"
-       + "Your Meeting " + meeting.meetingNumber + " with link " + meeting.link + " in " + meeting.time + " at " + meeting.date + " has been deleted" + ".\n\n" + "Your meetingNumber is "+data.meetingNumber+"\n"+"decription: " + meeting.participants[i].description;
+       + "Your Meeting " + meeting.meetingNumber + " with link " + meeting.link + " in " + meeting.time + " at " + meeting.date + " has been deleted" + ".\n\n" + "Your meeting number is "+meeting.meetingNumber+"\n"+"Your Password is "+meeting.password+"\n"+"decription: " + meeting.participants[i].description;
       var mailOptions = {
         from: "itprojectexample@outlook.com",
         to: meeting.participants[i].email,
-        subject: meeting.topic,
+        subject: "face-booklet meeting notification",
         text: greating,
       };
       await transporter.sendMail(mailOptions);
