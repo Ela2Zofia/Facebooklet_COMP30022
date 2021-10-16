@@ -91,7 +91,7 @@ app.post("/api/register", async function (req, res) {
     from: "itprojectexample@outlook.com",
     to: email,
     subject: "Your Password",
-    text: password,
+    text: "Username: " + username + "\n" + "Password: " + password,
   };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
