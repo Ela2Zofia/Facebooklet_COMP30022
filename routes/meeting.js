@@ -84,6 +84,7 @@ router.delete("/:id", async (req, res, next) => {
     
     res.status(200).send();
     meeting = await findMeeting(id);
+    await delMeeting(id);
     for (let i = 0; i < meeting.participants.length; i++){
       let greating = "Dear " + meeting.participants[i].lastName + " " + meeting.participants[i].firstName + "\n\n"
        + "Your Meeting " + meeting.meetingNumber + " with link " + meeting.link + " in " + meeting.time + " at " + meeting.date + " has been deleted" + ".\n\n" + "Your meetingNumber is "+data.meetingNumber+"\n"+"decription: " + meeting.participants[i].description;
@@ -95,7 +96,7 @@ router.delete("/:id", async (req, res, next) => {
       };
       await transporter.sendMail(mailOptions);
     }
-    await delMeeting(id);
+    
     
 });
   
