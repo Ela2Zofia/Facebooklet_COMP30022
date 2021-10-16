@@ -88,7 +88,7 @@ app.post("/api/register", async function (req, res) {
     res.send(back);
   }
   var mailOptions = {
-    from: "itprojectexample.com",
+    from: "itprojectexample@outlook.com",
     to: email,
     subject: "Your Password",
     text: password,
