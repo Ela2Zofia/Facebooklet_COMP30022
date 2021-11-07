@@ -1,7 +1,145 @@
 # API documentation for frontend
 
+## 1. Login
+### 1. Route
+```javascript
+  HOST_LOGIN = "/api/login";
+```
 
-## 2. Contacts
+### 2. Sample Data Structure
+```json
+{
+      "username": "admin", 
+      "password": "123123123"
+ }
+```
+
+### 3. APIs
+```javascript
+static async loginUserNet( userInfo ) {
+    const res =  await fetch(this.HOST_LOGIN, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify( userInfo ),
+      }
+    )
+
+    if ( !res.ok ) {
+      throw new Error( `HTTP error! status: ${res.status}` );
+    }
+
+    return await res.json();
+  }
+```
+**Input:** a user object as described above.
+
+**Expected return value:** a boolean value "isCorrect"
+
+## 2. Register
+### 1. Route
+```javascript
+HOST_REGISTER = "/api/register";
+```
+
+### 2. Sample Data Structure
+```json
+{
+      "username": "admin", 
+      "email": "123@gmail.com", 
+      "password": "1233334444"
+}
+```
+
+### 3. APIs
+```javascript
+static async registerUserNet( userInfo ) {
+    const res =  await fetch( this.HOST_REGISTER, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify( userInfo ),
+      }
+    );
+
+    if ( !res.ok ) {
+      throw new Error( `HTTP error! status: ${res.status}` );
+    }
+
+    return await res.json();
+  }
+```
+**Input:** a user object as described above.
+
+**Expected return value:** a boolean value "isCorrect"
+
+## 3. Forget Password
+### 1. Route
+```javascript
+HOST_FORGET = "/api/forgot";
+```
+
+### 2. Sample Data Structure
+```json
+{
+      "email": "123@gmail.com"
+}
+```
+
+### 3. APIs
+```javascript
+static async forgetUserNet( userInfo ) {
+    const res =  await fetch( this.HOST_FORGET, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify( userInfo ),
+      }
+    );
+    if ( !res.ok ) {
+      throw new Error( `HTTP error! status: ${res.status}` );
+    }
+
+    return await res.json();
+  }
+```
+**Input:** a user object as described above.
+
+**Expected return value:** a boolean value "isCorrect"
+
+## 4. Reset
+### 1. Route
+```javascript
+HOST_RESET = "/api/reset";
+```
+
+### 2. Sample Data Structure
+```json
+{
+      "email": "123@gmail.com", 
+      "code": "AFGK123", 
+      "password": "1234456444"
+}
+```
+
+### 3. APIs
+```javascript
+static async resetUserNet( userInfo ) {
+    const res =  await fetch(this.HOST_RESET, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify( userInfo ),
+      }
+    );
+    if ( !res.ok ) {
+      throw new Error( `HTTP error! status: ${res.status}` );
+    }
+
+    return await res.json();
+  }
+```
+**Input:** a user object as described above.
+
+**Expected return value:** a boolean value "isCorrect"
+
+## 5. Contacts
 ### 1. Route
 ```javascript
 HOST_CONTACTS = "api/contacts"
@@ -30,7 +168,6 @@ static async addContactNet(user, contact) {
       method: "POST",
       headers: {
         "Content-type": "application/json",
-        // TODO: user header
         "User": user
       },
       body: JSON.stringify(contact)
@@ -53,8 +190,6 @@ static async addContactNet(user, contact) {
       method: "GET",
       headers: {
         "Content-type": "application/json",
-  
-        // TODO: user header
         "User": user
       }
     });
@@ -76,7 +211,6 @@ static async addContactNet(user, contact) {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
-        // TODO: user header
         "User": user
       }
     });
@@ -97,7 +231,6 @@ static async addContactNet(user, contact) {
       method: "PUT",
       headers:{
         "Content-type": "application/json",
-        // TODO: user header
         "User": user
       },
       body: JSON.stringify(contact)
@@ -108,7 +241,7 @@ static async addContactNet(user, contact) {
     }
   };
 ```
-**Input:** a contact JSON object described at the top of this document, and id of the contact to be changed encoded in the request URL  
+**Input:** a contact JSON object described at the top of this document, and \_id of the contact to be changed encoded in the request URL  
 **Expected return value:** None
 
 
@@ -119,7 +252,6 @@ static async addContactNet(user, contact) {
       method: "GET",
       headers:{
         "Content-type": "application/json",
-        // TODO: user header
         "User": user
       },
     })
@@ -134,7 +266,8 @@ static async addContactNet(user, contact) {
 ```
 **Input:** text encoded as a query in the request URL  
 **Expected return value:** a list of contact objects, search by their firstName, lastName, occupation and tag. Ordered in alphabetical order.
-## 3. Meetings
+
+## 6. Meetings
 ### 1. Route
 ```javascript
 HOST_MEETINGS = "/api/meetings"
@@ -163,19 +296,16 @@ HOST_MEETINGS = "/api/meetings"
         }
     ],
         "description": "This is a test",
-        "id": 1
 }
 ```
 ### 3. APIs
 ```javascript
-static async fetchMeetingsNet(user){
+    static async fetchMeetingsNet(user){
         const HOST = this.HOST_MEETINGS+"?_sort=firstName";
         const res = await fetch(HOST, {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
-
-                // TODO: user header
                 "User": user
             }
         });
@@ -188,13 +318,16 @@ static async fetchMeetingsNet(user){
         return data;
     }
 ```
+**Input:** None
+**Expected return value:** a list of meetings that the USER has
+
+
 ```javascript
     static async addMeetingsNet(user, meeting) {
         const res = await fetch(this.HOST_MEETINGS, {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
-                // TODO: user header
                 "User": user
             },
             body: JSON.stringify(meeting)
@@ -208,6 +341,10 @@ static async fetchMeetingsNet(user){
         return data;
     };
 ```
+**Input:** a meeting object described at the top of this document.  
+**Expected return value:** a meeting object that has and “_id” field that is generated by MongoDB
+
+
 ```javascript
     static async delMeetingNet(user, id){
         const HOST = this.HOST_MEETINGS + "/" +id;
@@ -215,7 +352,6 @@ static async fetchMeetingsNet(user){
             method: "DELETE",
             headers: {
                 "Content-type": "application/json",
-                // TODO: user header
                 "User": user
             }
         });
@@ -225,6 +361,10 @@ static async fetchMeetingsNet(user){
         }
     };
 ```
+**Input:** id of the meeting to be deleted encoded in the request URL  
+**Expected return value:** None
+
+
 ```javascript
     static async editMeetingNet(user, meeting){
         const HOST = this.HOST_MEETINGS + "/" +meeting._id;
@@ -232,7 +372,6 @@ static async fetchMeetingsNet(user){
             method: "PUT",
             headers:{
                 "Content-type": "application/json",
-                // TODO: user header
                 "User": user
             },
             body: JSON.stringify(meeting)
@@ -242,9 +381,10 @@ static async fetchMeetingsNet(user){
             throw new Error(`HTTP error! status: ${res.status}`);
         }
     };
-
-}
 ```
+**Input:** a meeting JSON object described at the top of this document, and \_id of the meeting to be changed encoded in the request URL  
+**Expected return value:** None
+
 
 
 
