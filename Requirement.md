@@ -26,7 +26,7 @@
       - Meeting link
       - Start time & end time
       - **Custom content**
-    - Display future/ongoing/finished meetings
+    - Display future/<s>ongoing</s>/finished meetings
     - Notification function <s>(in-app)</s> (e-mail)
     - Individual info page for meetings
 ***
